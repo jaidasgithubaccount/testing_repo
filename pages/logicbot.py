@@ -5,20 +5,16 @@ from predicatelogic_nlp import preprocess, schematize, streamlitPrems
 
 @st.dialog("Example Schema", width="small")
 def demo():
-    validexample = "All smart farmers are either german or hungarian. Therefore, either somebody is not a farmer, or everyone is either german or hungarian."
+    validexample = "All smart farmers are either German or Hungarian. Therefore, either somebody smart is not a farmer, or everyone is either German or Hungarian."
     st.write("okay, let's do a quick demo.\nOur demo argument is: " + validexample + "\n(spoiler alert, this one is logically valid)!")
 
 def nlpProcess(userInput):
     # first, reset everything:
-    st.session_state.nlp_prems = ''
-    st.session_state.nlp_output = ''
     text = ''
-
-    validexample = "All smart farmers are either german or hungarian. Therefore, either somebody is not a farmer, or everyone is either german or hungarian."
-    if userInput == 'd' or userInput == 'demo':
-        #demo()
+    validexample = "All smart farmers are either German or Hungarian. Therefore, either somebody smart is not a farmer, or everyone is either German or Hungarian."
+    if userInput.lower() == 'd' or userInput.lower() == 'demo':
         userInput = validexample
-    premises = streamlitPrems(userInput.split('.')) # listing the premises
+    premises = streamlitPrems(userInput) # listing the premises
     st.session_state.nlp_prems = premises
 
     text = preprocess(userInput) #creates a new data structure with pre-processed text in the right format <3
@@ -26,6 +22,11 @@ def nlpProcess(userInput):
     text = str(text)
     schematized_argument = text
     st.session_state.nlp_output = schematized_argument
+    return
+
+def clearText():
+    st.session_state.nlp_prems = ''
+    st.session_state.nlp_output = ''
     return
 # the actual website page:
 
@@ -47,20 +48,29 @@ st.markdown('''
             ''')
 
 st.header("Current Iteration: LogicBot 1.0 - Propositional Logic")
+st.markdown("")
 
+st.subheader("Further Work: Validity and Soundness")
+st.markdown("")
 
-st.header("Future Iterations: Predicate Logic")
+st.header("Future Iterations: Predicate Logic (with NLP)")
 st.markdown("Future iterations of the LogicBot might utilize natural language processing to determine the ***Universe of Discourse*** and ***Scope of Discourse*** for certain sentences. The Universe of Discourse refers to the kinds of things enclosed by a variable like 'x' in a schema. The Scope refers to whether one refers to *all* elements in the universe, or only *some*.")
 st.markdown("Here's how a similar concept might be understood with different universes and scopes of discourse:") 
 
 st.text("to better schematize them according to Predicate Logic, rather than the Propositional Logic implementation above. Here's an example of what that schematization might look like:")
 
-userInput = st.text_area("input sentence here, or type 'demo' to see how this works:")
-st.button("Schematize", help="input text above, and click me to schematize with NLP", on_click=nlpProcess(userInput))
-st.text_area(label="List of Premises", key="nlp_prems")
-st.text_area(label="Schematized Argument", key="nlp_output")
+theysay = st.text_area("Input a sentence here using predicate logic, or type 'demo' to see how this works:")
+schema_button = st.button("Schematize", help="Input text above, and click me to schematize!")
+if schema_button:
+    nlpProcess(theysay)
+delete_button = st.button("Clear", help="Click me to clear fields!")
+if delete_button:
+    clearText()
 
-st.markdown("A LogicBot with NLP-type classification might also be able to parse the application of general principles or logical rules as part of one's reasoning.")
+st.text_area(label="List of Premises and Conclusions", key="nlp_prems")
+st.text_area(label="Schematized Argument (_see note_)", key="nlp_output")
+st.caption("_NOTE: text has been pre-processed with NLTK's tokenizer and lemmatizer, which is why words are in their neutral/first-person/dictionary-style tense and conjugation. Helpful for future classification down the road!_")
+st.markdown("A LogicBot with NLP-type classification might also be able to parse the application of general principles or logical rules as part of one's reasoning - that way, we could add schematized English text as inputs to SymPy's .")
 
 st.divider()
 st.header("Sources and Attributions")

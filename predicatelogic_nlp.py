@@ -20,7 +20,7 @@ import time
 #sample text for debugging
 longexample = "If a farmer who owns cows sells milk then he either does not drink it or he takes a loss."
 example = "If I go to the movies, I'll bring home popcorn."
-validexample = "All smart farmers are either german or hungarian. Therefore, either somebody is not a farmer, or everyone is either german or hungarian."
+validexample = "All smart farmers are either German or Hungarian. Therefore, either somebody smart is not a farmer, or everyone is either German or Hungarian."
 
 tag_map = defaultdict(lambda: wn.NOUN)
 tag_map['J'] = wn.ADJ
@@ -76,19 +76,21 @@ def preprocess(document):
     return pargument 
 
 #reads an entire arguments' premises off (print to screen)
-def streamlitPrems(argument):
-    tn = (len(argument) - 1) # idx after final sentence of arg list.
+def streamlitPrems(paragraph): # always receives a STRING - not a list of lists.
+    multipleSentences = False # every time you call this, reset your checker.
     header = "" # scratch
     count = 0
     lines = "" #the final textbox.
-    if tn == 1:
-        lines += "P. ", argument[0]
-    if tn != 1:
+    argument = sent_tokenize(paragraph) # NLTK tokenizes the sentences for me thank you!
+    if len(argument) > 1: #if there's more than one sentence:
         multipleSentences = True
+    if not multipleSentences:
+        lines += "P. " + paragraph # might as well chuck the whole thing in there.
+    if multipleSentences:
         for premise in argument:
             count += 1
-            header = 'P' + str(count) if count < tn else 'C' # isolate the conclusion
-            #add a line:
+            header = "P" + str(count) if count < len(argument) else 'C' # isolate the conclusion
+            # add a line
             lines += header + ". " + str(premise) + "\n"
     return lines
 
@@ -115,12 +117,13 @@ def schematize(argument):
         # add logic to each sentence:
         schematized = addlogic(i, sent) #adds logic to sentence. has a sub-function for handling tricky logic.
         # then post-process the sentence:
-        postprocessed = postprocess(i, sent) #determines grouping for adding variables
+        cleaned = removeXs(sent)
+        # postprocessed = postprocess(i, sent) #determines grouping for adding variables
         #print(schematized) #db
         #marked = addvars(i, sent) #adds variables
         #let's see changes!
         #updateparg(i, schematized)
-    setglobalsentence(argument)
+
     return argument
 
 def addSymbols(index, sentence):
@@ -165,21 +168,21 @@ def simpleSymbols(sentence, metadata):
     scope_open = '' #we need to close a scope before we move to our next sentence.
 
     # okay, now for each word in the sentence:
-    for x in range(len(sentence)):
-            #drop unnecessary words:
-            if sentence[x] in drop:
-                sentence[x] = 'X'
-            #substitute easy words:
-            if sentence[x] in ezlogic:
-                sentence[x] = ezlogic[sentence[x]]
-            # mark tricky words:
-            if sentence[x] in tricks:
-                #print("needs a tricky solve for " + sentence[x]) 
-                metadata['tricky'] = True # update this metadata.
-            # mark scope words:
-            if sentence[x] in scopes:
-                #print("needs a scope-pass for " + sentence[x])
-                metadata['scope'] = True
+    for wordy in sentence:
+        # drop unnecessary words:
+        if wordy in drop:
+            wordy = 'X'
+        # substitute easy words:
+        if wordy in ezlogic:
+            wordy = ezlogic[wordy]
+        # mark tricky words:
+        if wordy in tricks:
+            #print("needs a tricky solve for " + wordy)
+            metadata['tricky'] = True # update this metadata.
+        # mark scope words:
+        if wordy in scopes:
+            #print("needs a scope-pass for " + wordy)
+            metadata['scope'] = True
             
     return sentence
 
@@ -278,6 +281,7 @@ def addlogic(i, sentence):
                 sentence[x] = uniscope[sentence[x]]
             #then check for existential scope:
             elif sentence[x] == 'there':
+                # check next word...
                 if sentence[x + 1] == 'be':
                     scope_open = 'exi'
                     sentence[x] = '(Ǝx)('
@@ -446,7 +450,7 @@ def trickysolve(trickinfo):
                 #look for a then or a comma:
                 for then in range(windex, len(sentence)):
                     if sentence[then] == 'then' or sentence[then] == ',':
-                        sentence[windex] = 'X'
+                        sentence[windex] = 'IF'
                         sentence[then] = ' > '
             else: #not the start of the sentence
                 #check if previous word is only:
@@ -476,6 +480,13 @@ def trickysolve(trickinfo):
 
 
     return
+
+def removeXs(sent):
+    should_remove = ['X', ',', '.', ', ', 'therefore']
+    for word in sent:
+        if word in should_remove:
+            sent.remove(word)
+    return sent
 
 def postprocess(i, sent):
     sentenceindex = i
