@@ -21,7 +21,7 @@ Either Danny didn't come to the party or Virgil didn't come to the party.
 A ham sandwich is better than nothing 
   and nothing is better than eternal happiness
   therefore a ham sandwich is better than eternal happiness.
-'''.split('.')
+'''
 
 peters_sentences = '''
 Polkadots and Moonbeams.
@@ -196,6 +196,7 @@ parsehelp = { # so sympy can recognize the boolean algebra when it attempts to p
 
 # basic implementation of Goldfarb's method. returns True or False if valid/invalid, and an assignment that proves invalidity if so.
 def section_25(premises, conclusion):
+    deliverable = [] # easy passing through diff python files
     defs = {} # local variable so that we can keep track of our definitions
     valid = False
     printoff = "" # text with the info!
@@ -253,24 +254,26 @@ def section_25(premises, conclusion):
     elif not test:  # if P & -Q is unsatisfiable, then P > Q is valid:
         valid = True
         printoff = "Schema is valid."
-
-    return valid, printoff
+    
+    deliverable = [valid, printoff]
+    return deliverable
 
 # This is modified from Peter Norvig's implementation of the schematizer. Copyright (c) 2010-2017 Peter Norvig!!
-def logic(sentences, width=80): 
+def logic(sentences):
+    defs = {} 
+    total = ""
     "Match the rules against each sentence in text, and print each result."
-    for s in map(clean, sentences):
-        logic, defs = match_rules(s, rules, {})
-        parsed = parse_expr(logic, local_dict=parsehelp)
-        text = ""
-        text += '\n' + textwrap.fill('English: ' + s +'.', width) + '\n\nLogic: ' + logic + '\n\nSympyLogic: '+ parsed
+    for s in sentences:
+        if s == '.' or s == '':
+            continue
+        logic, defs = match_rules(s, rules, defs)
+        sentence = "\nEnglish: " + s + "." + "\nLogic: " + logic
         for P in sorted(defs):
-            text += '{}: {}'.format(P, defs[P])
-    return text
+            sentence += "\n{}: {}".format(P, defs[P])
+        total += sentence
+    return total
 
-# for streamlit access:
-def getsentences():
-    return shortsents
 
 def getpremises_conclusion():
-    return testpremises, testconclusion
+    both = [testpremises, testconclusion]
+    return both

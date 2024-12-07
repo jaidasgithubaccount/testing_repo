@@ -1,6 +1,6 @@
 import streamlit as st
 from predicatelogic_nlp import preprocess, schematize, streamlitPrems
-from propositionlogic_regex import section_25, logic, getsentences, getpremises_conclusion
+from propositionlogic_regex import section_25, logic, getpremises_conclusion
 # functions:
 
 def nlpProcess(userInput):
@@ -19,24 +19,45 @@ def nlpProcess(userInput):
     st.session_state.nlp_output = schematized_argument
     return
 
+
 def regexSchema(userInput):
+    shortsents = '''If you liked it then you shoulda put a ring on it.'''
     if userInput.lower() == 'd' or userInput.lower() == 'demo':
-        userinput = getsentences
-    result = logic(userInput) # here's our logic answer.
+        userInput = shortsents
+        st.toast("### **Demo String:**\n {}".format(shortsents))
+    splitsentences = [sent.lstrip() for sent in userInput.split('.')] # we need to clean our data
+    result = logic(splitsentences) # here's our logic answer.
+    result = str(result)
     st.session_state.regex_schema = result
     return
 
+
 def sec25(userprems, userconcl):
+    testpremises = '''If the fish is Kosher then the fish has fins and the fish has scales. If the fish has fins and the fish has scales then the fish is Kosher. If the fish has scales then the fish has fins.''' 
+    testconclusion = "If the fish has scales, then the fish is Kosher."
     if userprems.lower() == 'd' or userprems.lower() == 'demo':
-        userprems, userconcl = getpremises_conclusion
-    valid, text = section_25(userprems, userconcl)
+        userprems = testpremises
+        userconcl = testconclusion
+        st.toast("### **Demo Premises:**\n {}\n### **Conclusion:**\n {}".format(userprems, userconcl))
+    deliverable = section_25(userprems, userconcl)
+    valid = deliverable[0]
+    text = deliverable[1]
     st.session_state.regex_sec25 = str(valid) + '\n' + text
 
-def clearText():
-    st.session_state.nlp_prems = ''
-    st.session_state.nlp_output = ''
+
+def demo25():
+    testpremises = '''If the fish is Kosher then the fish has fins and the fish has scales. If the fish has fins and the fish has scales then the fish is Kosher. If the fish has scales then the fish has fins.''' 
+    testconclusion = "If the fish has scales, then the fish is Kosher."
+    return
+
+def clearregex():
     st.session_state.regex_schema = ''
     st.session_state.regex_sec25 = ''
+    return
+
+def clearnlp():
+    st.session_state.nlp_prems = ''
+    st.session_state.nlp_output = ''
     return
 
 # website:
@@ -69,23 +90,39 @@ schema, col25 = st.columns(2)
 with schema:
     # I/O
     st.subheader("Translate English to Logic")
-    st.text_input("Put an English sentence here!")
-    one, two = st.columns(2)
+    schemavalue = st.text_input("Input English Sentence:", key="schema_input")
+    one, two, third = st.columns(3)
     with one:
         schema_button = st.button("Translate", help="Click me to schematize this sentence.")
+        if schema_button:
+            regexSchema(schemavalue)
     with two:
+        demo_button = st.button("Demo", key="demo_schema", help="Click me to demonstrate!")
+        if demo_button:
+            regexSchema("demo")
+    with third:
         delete_button = st.button("Clear All", key=3, help="Click me to clear all fields!")
+        if delete_button:
+            st.session_state.regex_schema = ''
     st.text_area(label="Schematized Sentence(s)", key="regex_schema")
 with col25:
     # I/O
     st.subheader("Test if Premises imply Conclusion")
-    st.text_area("Premise(s)")
-    st.text_input("Conclusion")
-    three, four = st.columns(2)
+    sec25prems = st.text_area("Input Premise(s):", key="premise_input")
+    sec25concl = st.text_input("Input Conclusion:", key="conclusion_input")
+    three, four, sixth = st.columns(3)
     with three:
-        sec25_button = st.button("Test", help="Use Goldfarb's Method of Section 25!")
+        sec25_button = st.button("Test for Implication", help="Use Goldfarb's Method of Section 25!")
+        if sec25_button:
+            sec25(sec25prems, sec25concl)
     with four:
+        demo_button = st.button("Demo", key="demo_sec25", help="Click me to demonstrate!")
+        if demo_button:
+            sec25("demo", "demo")
+    with sixth:
         delete_button = st.button("Clear All", key=2, help="Click me to clear all fields!")
+        if delete_button:
+            st.session_state.regex_sec25 = ''
     st.text_area(label="Solved for Validity", key="regex_sec25")
 
 # FURTHER WORK
@@ -128,17 +165,22 @@ Qx = x is a Poet
 Rx = x is in the Accelerated Program   
 Sx = x received an A+    """)
 # INPUT TEXT
-theysay = st.text_area("Input a sentence here using predicate logic, or type 'demo' to see how this works:")
+theysay = st.text_area("Input a sentence here using predicate logic:")
 # BUTTONS
-five, six = st.columns(2)
+five, six, eighth = st.columns(3)
 with five:
     schema_button = st.button("Schematize", help="Input text above, and click me to schematize!")
 with six:
+    demo_button = st.button("Demo", key="predicate_demo", help="Click me to demonstrate!")
+with eighth:
     delete_button = st.button("Clear All", key=4, help="Click me to clear all fields!")
+
 if schema_button:
     nlpProcess(theysay)
 if delete_button:
-    clearText()
+    clearnlp()
+if demo_button:
+    nlpProcess("demo")
 # OUTPUT SECTIONS
 st.text_area(label="List of Premises and Conclusions", key="nlp_prems")
 st.text_area(label="Schematized Argument (_see note_)", key="nlp_output")
