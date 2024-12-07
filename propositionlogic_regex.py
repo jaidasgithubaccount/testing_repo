@@ -5,9 +5,9 @@ ATTRIBUTIONS
 Propositional Logic Functions and Methods - Copyright (c) 2010-2017 Peter Norvig
 Sympy - Copyright (c) 2006-2023 SymPy Development Team
 """
-# EXTERNAL IMPORTS
+# EXTERNAL IMPORTS - if my predlogic one is to be believed, this is the one that's driving the boat
 import sympy
-from sympy import symbols, Symbol # for making your own symbols out of strings (transforms strings into Symbol class instances)
+from sympy import Symbol # for making your own symbols out of strings (transforms strings into Symbol class instances)
 from sympy.logic import And, Or, Not, Implies
 from sympy.logic.inference import satisfiable # this is really the only thing we're checking for.
 import re # regular expressions - PropLogic.ipynb import
@@ -16,7 +16,11 @@ from sympy.parsing.sympy_parser import parse_expr
 
 # TEXT BLOBS - TO BE PROCESSED
 shortsents = '''
-Farming is easy or farming is hard, so farming is not easy or farming is not hard.
+If you liked it then you shoulda put a ring on it.
+Either Danny didn't come to the party or Virgil didn't come to the party.
+A ham sandwich is better than nothing 
+  and nothing is better than eternal happiness
+  therefore a ham sandwich is better than eternal happiness.
 '''.split('.')
 
 peters_sentences = '''
@@ -195,7 +199,6 @@ def section_25(premises, conclusion):
     defs = {} # local variable so that we can keep track of our definitions
     valid = False
     printoff = "" # text with the info!
-    deliverable = [] # tuple with either True or False (valid or invalid) AND potential print statment (answers if schema is invalid) 
     # these lists will host Sympy Symbol and String lists of all of the clauses (premises + conclusion).
     sec25 = []
     string25 = []
@@ -230,7 +233,6 @@ def section_25(premises, conclusion):
         string25.append("({})".format(str(clause)))
     # we're connecting the clauses byt the & operation, and then parsing  ' & ' situation to our string:
     string25 = ' & '.join(string25)
-    print("str25 ", string25)
     parsed_sec25 = parse_expr(string25, local_dict=parsehelp)
     test = satisfiable(parsed_sec25) # this is our method test. thank you sympy!!
 
@@ -252,11 +254,7 @@ def section_25(premises, conclusion):
         valid = True
         printoff = "Schema is valid."
 
-    print(valid)
-    # finally, we check the conjunction of the premises and the negated conclusion for satisfiability. 
-    deliverable = [valid, printoff]
-    print(printoff)
-    return deliverable
+    return valid, printoff
 
 # This is modified from Peter Norvig's implementation of the schematizer. Copyright (c) 2010-2017 Peter Norvig!!
 def logic(sentences, width=80): 
@@ -264,14 +262,15 @@ def logic(sentences, width=80):
     for s in map(clean, sentences):
         logic, defs = match_rules(s, rules, {})
         parsed = parse_expr(logic, local_dict=parsehelp)
-        
-        print('\n' + textwrap.fill('English: ' + s +'.', width), '\n\nLogic:', logic, '\n\nSympyLogic:', parsed)
+        text = ""
+        text += '\n' + textwrap.fill('English: ' + s +'.', width) + '\n\nLogic: ' + logic + '\n\nSympyLogic: '+ parsed
         for P in sorted(defs):
-            print('{}: {}'.format(P, defs[P]))
+            text += '{}: {}'.format(P, defs[P])
+    return text
 
 # for streamlit access:
 def getsentences():
-    return peters_sentences
+    return shortsents
 
 def getpremises_conclusion():
     return testpremises, testconclusion

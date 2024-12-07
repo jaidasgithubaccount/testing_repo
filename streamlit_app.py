@@ -1,5 +1,5 @@
 import streamlit as st
-
+import os
 
 def Home():
 # Show title and description.
@@ -15,6 +15,8 @@ def Home():
     st.page_link("pages/culturewarftp.py", label="The Culture War for the Planet")
     st.page_link("pages/logicbot.py", label="LogicBot - Argument-Strength Analyzer")
 
-pg = st.navigation([st.Page(Home), st.Page("pages/culturewarftp.py"), st.Page("pages/logicbot.py")])
+pages = [st.Page(Home, default=True), st.Page("culturewarftp.py"), st.Page("logicbot.py")]
+pg = st.navigation(pages)
 pg.run()
 
+os.system("streamlit run streamlit_app.py")

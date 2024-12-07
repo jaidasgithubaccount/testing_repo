@@ -1,7 +1,6 @@
 import streamlit as st
 from predicatelogic_nlp import preprocess, schematize, streamlitPrems
-from propositionlogic_regex import *
-
+from propositionlogic_regex import section_25, logic, getsentences, getpremises_conclusion
 # functions:
 
 def nlpProcess(userInput):
@@ -20,9 +19,24 @@ def nlpProcess(userInput):
     st.session_state.nlp_output = schematized_argument
     return
 
+def regexSchema(userInput):
+    if userInput.lower() == 'd' or userInput.lower() == 'demo':
+        userinput = getsentences
+    result = logic(userInput) # here's our logic answer.
+    st.session_state.regex_schema = result
+    return
+
+def sec25(userprems, userconcl):
+    if userprems.lower() == 'd' or userprems.lower() == 'demo':
+        userprems, userconcl = getpremises_conclusion
+    valid, text = section_25(userprems, userconcl)
+    st.session_state.regex_sec25 = str(valid) + '\n' + text
+
 def clearText():
     st.session_state.nlp_prems = ''
     st.session_state.nlp_output = ''
+    st.session_state.regex_schema = ''
+    st.session_state.regex_sec25 = ''
     return
 
 # website:
@@ -48,6 +62,33 @@ st.header("First Iteration: LogicBot 1.0 - Propositional Logic")
 st.markdown("As a proof of concept, I started by integrating Peter Norvig's [regular-expression propositional logic code](https://colab.research.google.com/github/norvig/pytudes/blob/master/ipynb/PropositionalLogic.ipynb) with [SymPy](https://docs.sympy.org/latest/modules/logic.html), a Python package that can check schematized arguments for ***satisfiability***.")
 st.markdown("A proposition -- like _P AND ~Q_ --  is ***satisfiable*** if there's at least one consistent truth-assignment for all the literals (variables) in the proposition. In this case, if P were True, and Q were False, then _P AND ~Q_ would evaluate to True -- this assignment ***satisfies*** that schema.")
 
+st.subheader("Try the LogicBot Out:")
+st.markdown("The first iteration of the logicbot can (1) 'schematize' english sentences and (2) prove whether a set of premises, as english sentences, imply a conclusion.")
+
+schema, col25 = st.columns(2)
+with schema:
+    # I/O
+    st.subheader("Translate English to Logic")
+    st.text_input("Put an English sentence here!")
+    one, two = st.columns(2)
+    with one:
+        schema_button = st.button("Translate", help="Click me to schematize this sentence.")
+    with two:
+        delete_button = st.button("Clear All", key=3, help="Click me to clear all fields!")
+    st.text_area(label="Schematized Sentence(s)", key="regex_schema")
+with col25:
+    # I/O
+    st.subheader("Test if Premises imply Conclusion")
+    st.text_area("Premise(s)")
+    st.text_input("Conclusion")
+    three, four = st.columns(2)
+    with three:
+        sec25_button = st.button("Test", help="Use Goldfarb's Method of Section 25!")
+    with four:
+        delete_button = st.button("Clear All", key=2, help="Click me to clear all fields!")
+    st.text_area(label="Solved for Validity", key="regex_sec25")
+
+# FURTHER WORK
 st.subheader("Further Work: Validity and Soundness")
 st.markdown("This logibot checks for vaildity, and will tell you if your arguments' premises don't necessarily imply your conclusion (and the circumstances that poke holes in your reasoning). It can't tell you if a valid argument is in any way ***sound***, or whether its premises are factual.")
 st.markdown("""Here's an out-of-the box NLI way to check for soundness, if you dare:  
@@ -89,8 +130,11 @@ Sx = x received an A+    """)
 # INPUT TEXT
 theysay = st.text_area("Input a sentence here using predicate logic, or type 'demo' to see how this works:")
 # BUTTONS
-schema_button = st.button("Schematize", help="Input text above, and click me to schematize!")
-delete_button = st.button("Clear", help="Click me to clear fields!")
+five, six = st.columns(2)
+with five:
+    schema_button = st.button("Schematize", help="Input text above, and click me to schematize!")
+with six:
+    delete_button = st.button("Clear All", key=4, help="Click me to clear all fields!")
 if schema_button:
     nlpProcess(theysay)
 if delete_button:
