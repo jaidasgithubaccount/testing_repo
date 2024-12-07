@@ -12,11 +12,11 @@ def Home():
     st.markdown("*Op-Ed, Bangor Daily News*")
     st.markdown("[News Link](https://www.bangordailynews.com/2022/07/26/opinion/opinion-contributor/harmful-dont-say-gay-bills-opinion-joam40zk0w/)")
     st.header("Personal Projects (Ongoing Work)")
-    st.page_link("pages/culturewarftp.py", label="The Culture War for the Planet")
-    st.page_link("pages/logicbot.py", label="LogicBot - Argument-Strength Analyzer")
+    st.page_link("culturewarftp.py", label="The Culture War for the Planet")
+    st.page_link("logicbot.py", label="LogicBot - Argument-Strength Analyzer")
 
 pages = [st.Page(Home, default=True), st.Page("culturewarftp.py"), st.Page("logicbot.py")]
 pg = st.navigation(pages)
 pg.run()
 
-os.system("streamlit run streamlit_app.py")
+#os.system("streamlit run streamlit_app.py")
