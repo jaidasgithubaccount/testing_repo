@@ -157,7 +157,7 @@ def simpleSymbols(sentence, metadata):
     #SIMPLE disjunctions (no either-or):
     'or' : ' v ', 
     #not:
-    'not' : '-',
+    'not' : '~',
     }
     #tricky words that we need to deal with later:
     tricks = ['if', 'only', 'either', 'neither', 'nor'] #if statements need to be evaluated. anything with only needs to be eval-ed as well.
@@ -247,7 +247,7 @@ def addlogic(i, sentence):
     #disjunctions:
     'or' : ' v ', 
     #not:
-    'not' : '-',
+    'not' : '~',
     }
     #universal and Existential, and Definite Scope variables:
     uniscope = {
@@ -415,7 +415,7 @@ def trickysolve(trickinfo):
                 if openpars:
                     sentence[idx] = ')'  
             #no stop - iterate on distance.
-            elif sentence[idx] != 'X' and sentence[idx] != '-' and sentence[idx] != ',': #ignoring non-literals
+            elif sentence[idx] != 'X' and sentence[idx] != '~' and sentence[idx] != ',': #ignoring non-literals
                 dist +=1
                 #print('dist between ' + sentence[windex] + " and " + sentence[idx] +  " == " + str(dist)) #db
            
@@ -501,7 +501,7 @@ def postprocess(i, sent):
     print(text)
     openparens = ['(', '(Ǝx)(', '(∀x)(', '(λx)(']
     closeparens = ')'
-    operators = ['v', '•', '≡', '>', '-']
+    operators = ['v', '•', '≡', '>', '~']
 
     #init tagger:
     tagged = nltk.pos_tag(newl) #tuple of words and their tags.

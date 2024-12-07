@@ -5,6 +5,8 @@ st.title("The Culture War for the Planet")
 st.header('Comparative analysis of r/collapse, r/preppers, r/itcouldhappenhere, and r/climate')
 st.divider()
 
+st.info("Still Under Construction!")
+
 st.header("Research Motivations:")
 st.subheader("What's going on on with r/Collapse?")
 
