@@ -44,7 +44,8 @@ st.header("[Ongoing Work] Analysis - Semantic Similarity, Topic Modeling")
 
 st.markdown("Yeah, you want to skip to the good stuff. I've done the Topic Modeling, but not the Comparative Analysis, so see below for a visualization of the former:")
 
-st.html("/workspaces/testing_repo/notpages/__pycache__/fourthlook.html")
+st.link_button(label="click me", url="/workspaces/testing_repo/notpages/fourthlook.html")
+
 
 
 
