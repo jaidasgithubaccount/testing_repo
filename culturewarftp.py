@@ -27,16 +27,26 @@ st.header("Data Sources + Data Collection")
 st.subheader("Where did I get this information, _and why does it help answer our questions?_")
 
 st.markdown("1. **The Reddit Comments**")
-st.markdown("I pulled 16,000 of the top comments and text posts of all time from r/collapse, r/preppers, r/itcouldhappenhere and r/climate, using [Praw](https://github.com/praw-dev/praw):")
-st.markdown("Comments were mostly from the years after 2018, but the earliest post is from 2016. This inadvertently captures 3 presidential tenures (Trump, Biden, Trump) - wonder if that'll be relevant!")
+st.markdown("""I pulled 16,000 of the top comments and text posts of all time from r/collapse, r/preppers, r/itcouldhappenhere and r/climate, using [Praw](https://github.com/praw-dev/praw).  
+_Comments were mostly from the years after 2018, but the earliest post is from 2016. This inadvertently captures 3 presidential tenures (Trump, Biden, Trump) - the early results make me think this is relevant!_""")
 
-st.markdown("I then compared that data with...")
 
-st.markdown("2. [Twitter Climate Change Sentiment Dataset](https://www.kaggle.com/datasets/edqian/twitter-climate-change-sentiment-dataset/data)")
-st.markdown("I compared data ")
+st.markdown("In order to classify the text I'd pulled as abusive language, or to determine the attitude toward climate change (opportunity vs. risk) in the text, I relied on machine learning models that had been pre-trained on other datasets...")
+
+st.markdown("2. [ClimateBERT Climate Change Sentiment Dataset](https://huggingface.co/datasets/climatebert/climate_sentiment)")
+st.markdown("_This dataset was used to train the [ClimateBERT](https://huggingface.co/climatebert/distilroberta-base-climate-sentiment) classification model for climate opportunity and risk._")
+
+st.markdown("3. [IndicAbusive Datasets](https://github.com/hate-alert/IndicAbusive/tree/main/Dataset)")
+st.markdown("_These were used to train various hate speech models, including the [English-Abusive-MuRIL](https://huggingface.co/Hate-speech-CNERG/english-abusive-MuRIL?text=...+%40THErealDVORAK+And+man-made+global+warming+will+never+warm+the+moon%2C+sun%2C+and+stars.+End+times+are+controlled+by+God+-+not+by+carbon) classification model I used in my research._")
 
 # CHROMADB VISUALIZATION
-st.header("[Current Work] Analysis - Semantic Similarity, Topic Modeling")
+st.header("[Ongoing Work] Analysis - Semantic Similarity, Topic Modeling")
+
+st.markdown("Yeah, you want to skip to the good stuff. I've done the Topic Modeling, but not the Comparative Analysis, so see below for a visualization of the former:")
+
+st.html("/workspaces/testing_repo/notpages/__pycache__/fourthlook.html")
+
+
 
 st.divider()
 
