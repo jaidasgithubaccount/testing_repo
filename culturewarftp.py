@@ -5,7 +5,7 @@ st.title("The Culture War for the Planet")
 st.header('Comparative analysis of r/collapse, r/preppers, r/itcouldhappenhere, and r/climate')
 st.divider()
 
-st.info("Ongoing Work - visualizations are in-progress")
+st.info("this work is still ongoing! check back for updates :)")
 
 # RESEARCH MOTIVATIONS
 st.header("Research Motivations:")
@@ -39,15 +39,57 @@ st.markdown("_This dataset was used to train the [ClimateBERT](https://huggingfa
 st.markdown("3. [IndicAbusive Datasets](https://github.com/hate-alert/IndicAbusive/tree/main/Dataset)")
 st.markdown("_These were used to train various hate speech models, including the [English-Abusive-MuRIL](https://huggingface.co/Hate-speech-CNERG/english-abusive-MuRIL?text=...+%40THErealDVORAK+And+man-made+global+warming+will+never+warm+the+moon%2C+sun%2C+and+stars.+End+times+are+controlled+by+God+-+not+by+carbon) classification model I used in my research._")
 
-# CHROMADB VISUALIZATION
-st.header("[Ongoing Work] Analysis - Semantic Similarity, Topic Modeling")
+# ANALYSIS HEADER
+st.header("Analysis - Semantic Similarity, Topic Modeling (Ongoing Work)")
 
 st.markdown("Yeah, you want to skip to the good stuff. I've done the Topic Modeling, but not the Comparative Analysis, so see below for a visualization of the former:")
 
-st.link_button(label="click me", url="/workspaces/testing_repo/notpages/fourthlook.html")
+st.link_button(label="click me!", url="https://jaidasgithubaccount.github.io/data_visualizations/", icon='📊')
 
+st.markdown("But if you want to know what you're looking at...")
 
+# TOPIC MODELING - BERTOPIC VIZ
+st.subheader("Topic Modeling - setting up BERTopic")
+st.markdown("""I used [BERTopic](https://github.com/MaartenGr/BERTopic), a Python package that takes sets of documents, mines them for their topics, and analyzes an entire corpus of the documents according to those (zero-shot-) classified topics.
+""")
+st.markdown("""I first had to clean my dataset (removing stopwords, cleaning up uniform formatting on some subreddits' comments, etc), and then used BERTopic to determine the 'state space' - the kinds of things that people in these climate subreddits are talking about today.
+""")
 
+st.markdown("""The original dataset had 15807 topics; using BERTopic's reduce_topics() method, I forced the model to combine them into 20 groups. I then used a [SciKit-Learn](https://github.com/scikit-learn/scikit-learn) function to get text embeddings with English stop words removed, and re-ran the topic model with those vectorized topics. The final topic model, saved for use throughout the rest of the project, leverages these two modifications.
+""")
+
+# COMPARATIVE ANALYSIS - TEXT CLASSIFIERS
+st.subheader("Comparative Analysis - setting up the text classifiers")
+st.markdown("""There are two kinds of comparative analysis:
+- BERTopic topics by class (with the source_data (maybe the real names, dictionary-searched) fed in as the classes in question)
+- other DataFrame analysis (leaving the vector-embeddings database behind). Augmenting a master DataStructure with:
+	- abusive language (by subreddit, over time, etc)
+	- climate opportunity/risk (by subreddit, over time, etc)
+""")
+
+st.markdown("""I'm still chugging along on the Topics by Class analysis (there are more tweaks I want to do to the underlying BERTopic model; no use getting ahead of myself), but pivoted in the meantime to the other DataFrame Analysis.
+""")
+
+st.markdown("""These are the Huggingface models I'm using for my text classification:
+1) classifying abusive language: [Hate-speech-CNERG/english-abusive-MuRIL](https://huggingface.co/Hate-speech-CNERG/english-abusive-MuRIL?text=...+%40THErealDVORAK+And+man-made+global+warming+will+never+warm+the+moon%2C+sun%2C+and+stars.+End+times+are+controlled+by+God+-+not+by+carbon)
+2) classifying climate opportunity/risk: [climatebert/distilroberta-base-climate-sentiment](https://huggingface.co/climatebert/distilroberta-base-climate-sentiment)
+""")
+
+st.markdown("""To classify the original reddit comments, I utilize HuggingFace's [transformers](https://github.com/huggingface/transformers); specifically the `pipeline` API wrapper, which simplifies the workflow tremendously. 
+""")
+
+# MORE WORK
+st.subheader("Ongoing Work, Thoughts, Etc:")
+st.markdown("""
+- Topic Modeling
+	- I've settled on BERTopic for the majority (almost all) of my Topic Modeling/Semantic analysis, over ChromaDB, Txtai, and Gensim. BERTopic is easier to use out of the box than Txtai or Gensim, and has the key analysis features ChromaDB lacks. Keeping an eye out for Chroma, with my climate-conscious computation in mind...
+- Comparative Analysis
+	- Topic Modeling by class - currently working!
+	- Text Classification (comparing abusive subreddits) - augmenting my dataset with text-classification scores (abusive language and climate-attitude)
+		- Currently stuck with some PyTorch bugs/weird RuntimeErrors. **Potential Fix:** get my hands dirty with the transformer models. The error I've gotten that halts my work is `RuntimeError: The size of tensor a (638) must match the size of tensor b (512) at non-singleton dimension 1`.
+- Final Data Presentation
+	- I'm thinking this project makes the most sense as an interactive website... easiest for me to send around to friends/family (intended audience). 
+""")
 
 st.divider()
 
@@ -73,6 +115,20 @@ modification, are permitted provided that the following conditions are met:
    and/or other materials provided with the distribution.
 ```
             """)
+
+st.markdown("""**BERTopic Topic Modeling**  
+            [GitHub]()
+""")
+
+st.markdown("""
+```
+article{grootendorst2022bertopic, 
+title={BERTopic: Neural topic modeling with a class-based TF-IDF procedure}, 
+author={Grootendorst, Maarten}, 
+journal={arXiv preprint arXiv:2203.05794},year={2022}}
+```
+
+""")
 
 st.markdown("### Text Classifier Models:")
 st.markdown("""**Hate-speech-CNERG/english-abusive-MuRIL**  
