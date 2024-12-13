@@ -1,9 +1,8 @@
 import streamlit as st
-from predicatelogic_nlp import preprocess, schematize, streamlitPrems
-from propositionlogic_regex import section_25, logic, getpremises_conclusion
 # functions:
 
 def nlpProcess(userInput):
+    from predicatelogic_nlp import preprocess, schematize, streamlitPrems
     # first, reset everything:
     text = ''
     validexample = "All smart farmers are either German or Hungarian. Therefore, either somebody smart is not a farmer, or everyone is either German or Hungarian."
@@ -21,6 +20,7 @@ def nlpProcess(userInput):
 
 
 def regexSchema(userInput):
+    from propositionlogic_regex import logic
     shortsents = '''If you liked it then you shoulda put a ring on it.'''
     if userInput.lower() == 'd' or userInput.lower() == 'demo':
         userInput = shortsents
@@ -33,6 +33,7 @@ def regexSchema(userInput):
 
 
 def sec25(userprems, userconcl):
+    from propositionlogic_regex import section_25
     testpremises = '''If the fish is Kosher then the fish has fins and the fish has scales. If the fish has fins and the fish has scales then the fish is Kosher. If the fish has scales then the fish has fins.''' 
     testconclusion = "If the fish has scales, then the fish is Kosher."
     if userprems.lower() == 'd' or userprems.lower() == 'demo':
