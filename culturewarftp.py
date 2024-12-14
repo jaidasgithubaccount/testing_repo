@@ -39,16 +39,16 @@ st.markdown("_These were used to train various hate speech models, including the
 # ANALYSIS HEADER
 st.header("Analysis - Semantic Similarity, Topic Modeling (Ongoing Work)")
 
-st.markdown("To skip ahead to my work so far - I've gotten a preliminary vizualization of the topics discussed by Redditors in the various climate-related subreddits. See this link for an interactive graph:")
+st.markdown("I've gotten a preliminary vizualization of the topics discussed by Redditors in the various climate-related subreddits. See this link for an interactive graph:")
 
-left, middle, right = st.columns(3)
+left, middle, right = st.columns([0.25, 0.5, 0.25])
 with middle:
-  st.link_button(label="click me!", url="https://jaidasgithubaccount.github.io/data_visualizations/", icon='📊', use_container_width=True)
+  st.link_button(label="Redditors' takes on the climate catastrophe", url="https://jaidasgithubaccount.github.io/data_visualizations/", icon='📊', use_container_width=True)
 
-st.markdown("""Notable comment topics:   
-            - Migration and Refugee Status (Topic 12): keywords 'Haiti', 'People', 'Country'   
-            - The COVID-19 Pandemic (Topic 6): keywords 'covid', 'insurance', 'virus'  
-            - U.S. (Conservative) Politics (Topic 1): keywords 'trump', 'people', 'just'""")
+st.markdown("""Notable comment topics and keywords found in subreddit comments:   
+- :blue[**Migration and Refugee Status**] **(Topic 12):** keywords 'Haiti', 'people', 'country'   
+- :orange[**The COVID-19 Pandemic**] **(Topic 6):** keywords 'covid', 'insurance', 'virus'  
+- :green[**Conservative Politics**] **(Topic 1):** keywords 'Trump', 'people', 'just'""")
 
 st.markdown("But if you want to learn more about what you're looking at in the graph at the link above...")
 
@@ -65,21 +65,33 @@ st.markdown("""The original dataset had 15807 topics; using BERTopic's reduce_to
 # COMPARATIVE ANALYSIS - TEXT CLASSIFIERS
 st.subheader("Comparative Analysis - setting up the text classifiers")
 st.markdown("""There are two kinds of comparative analysis:
-- BERTopic topics by class (with the source_data (maybe the real names, dictionary-searched) fed in as the classes in question)
-- other DataFrame analysis (leaving the vector-embeddings database behind). Augmenting a master DataStructure with:
-	- abusive language (by subreddit, over time, etc)
-	- climate opportunity/risk (by subreddit, over time, etc)
+- Analyzing BERTopic topics by subreddit, with the BERTopic 'vector database' built by that Python module:
+  - this will help determine whether certain topics are unique to a given climate-subreddit. (Unlikely that any of the top 10 topics in the vizualization linked above are uniqe to one subreddit, but others might be!)
+- Other data analysis, performed by augmenting a master data structure (pandas DataFrame, or .csv file) with algorithmically-derived classification, like:
+	- whether the text contains abusive language
+	- whether the text treats the climate as an opportunity/risk
+  - psychological state of the user (optimistic vs. pessimistic, trusting vs. distrustful)
 """)
 
-st.markdown("""I'm still chugging along on the Topics by Class analysis (there are more tweaks I want to do to the underlying BERTopic model; no use getting ahead of myself), but pivoted in the meantime to the other DataFrame Analysis.
+st.markdown("""I'm still chugging along on the Topics by Class analysis (there are more tweaks I want to do to the underlying BERTopic model), but have also been exploring classifiers to help with the other data analysis.
 """)
 
 st.markdown("""These are the Huggingface models I'm using for my text classification:
-1) classifying abusive language: [Hate-speech-CNERG/english-abusive-MuRIL](https://huggingface.co/Hate-speech-CNERG/english-abusive-MuRIL?text=...+%40THErealDVORAK+And+man-made+global+warming+will+never+warm+the+moon%2C+sun%2C+and+stars.+End+times+are+controlled+by+God+-+not+by+carbon)
+1) classifying abusive language: [Hate-speech-CNERG/english-abusive-MuRIL](https://huggingface.co/Hate-speech-CNERG/english-abusive-MuRIL)
 2) classifying climate opportunity/risk: [climatebert/distilroberta-base-climate-sentiment](https://huggingface.co/climatebert/distilroberta-base-climate-sentiment)
+3) classifying social adaptivity - optimism/pessimism and trust/disgust: [ayoubkirouane/BERT-Emotions-Classifier](https://huggingface.co/ayoubkirouane/BERT-Emotions-Classifier?text=This+is+a+basic+reddit+comment.)
 """)
 
-st.markdown("""To classify the original reddit comments, I utilize HuggingFace's [transformers](https://github.com/huggingface/transformers); specifically the `pipeline` API wrapper, which simplifies the workflow tremendously. 
+st.markdown("""To classify the original reddit comments, I utilize HuggingFace's [transformers](https://github.com/huggingface/transformers), specifically the `pipeline` API wrapper, which simplifies the workflow tremendously. 
+""")
+
+st.markdown(""" I'm looking to solve the following kinds of questions:
+1. Which subreddits have the most instances of abusive language?
+2. Which comments approach the climate catastrophe as an opportunity to gain a cooperative or competitive advantage? Do they tend to belong to a given subreddit rather than others?
+3. How did the COVID-19 pandemic affect users' rhetoric regarding:  
+a. public trust/the social contract  
+b. resource hoarding (stockpiling goods)   
+c. world outlook ()
 """)
 
 # MORE WORK
@@ -92,7 +104,7 @@ st.markdown("""
 	- Text Classification (comparing abusive subreddits) - augmenting my dataset with text-classification scores (abusive language and climate-attitude)
 		- Currently stuck with some PyTorch bugs/weird RuntimeErrors. **Potential Fix:** get my hands dirty with the transformer models. The error I've gotten that halts my work is `RuntimeError: The size of tensor a (638) must match the size of tensor b (512) at non-singleton dimension 1`.
 - Final Data Presentation
-	- I'm thinking this project makes the most sense as an interactive website... easiest for me to send around to friends/family (intended audience). 
+	- I'm thinking this project makes the most sense as an interactive website... easiest for me to send around to friends/family (my intended audience). 
 """)
 
 st.divider()
