@@ -41,7 +41,7 @@ st.header("Analysis - Semantic Similarity, Topic Modeling (Ongoing Work)")
 
 st.markdown("I've gotten a preliminary vizualization of the topics discussed by Redditors in the various climate-related subreddits. See this link for an interactive graph:")
 
-left, middle, right = st.columns([0.25, 0.5, 0.25])
+left, middle, right = st.columns([0.15, 0.7, 0.15])
 with middle:
   st.link_button(label="Redditors' takes on the climate catastrophe", url="https://jaidasgithubaccount.github.io/data_visualizations/", icon='📊', use_container_width=True)
 
