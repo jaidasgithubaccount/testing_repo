@@ -55,9 +55,8 @@ def clearnlp():
     return
 
 # website:
-st.title("LogicBot")
-st.header("Argument-strength Analyzer")
-st.divider()
+st.title("LogicBot 🦾")
+st.header("Argument-strength Analyzer", divider="red")
 
 st.header("... what's that?")
 st.text("The LogicBot uses regular expressions to translate English sentences into Propositional Logic Schemata.")
@@ -156,7 +155,6 @@ p= Paul""")
 st.markdown("... and different universes:") 
 st.markdown('''
 **Sentence:** All poets in the accelerated program received an A+.
-
 | Universe of Discourse              | Schema                  |
 | ---------------------------------- | ----------------------- |
 | **Everyone and Every Thing**       | (∀x)(Px ⋀ Qx ⋀ Rx > Sx) |
