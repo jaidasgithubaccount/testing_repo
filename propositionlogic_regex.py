@@ -267,7 +267,7 @@ def logic(sentences):
         if s == '.' or s == '':
             continue
         logic, defs = match_rules(s, rules, defs)
-        sentence = "\nEnglish: " + s + "." + "\nLogic: " + logic
+        sentence = "English: " + s + "." + "\nLogic: " + logic
         for P in sorted(defs):
             sentence += "\n{}: {}".format(P, defs[P])
         total += sentence

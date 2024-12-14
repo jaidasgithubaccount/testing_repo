@@ -23,8 +23,7 @@ def regexSchema(userInput):
     from propositionlogic_regex import logic
     shortsents = '''If you liked it then you shoulda put a ring on it.'''
     if userInput.lower() == 'd' or userInput.lower() == 'demo':
-        userInput = shortsents
-        st.toast("### **Demo String:**\n {}".format(shortsents))
+        userInput = shortsents 
     splitsentences = [sent.lstrip() for sent in userInput.split('.')] # we need to clean our data
     result = logic(splitsentences) # here's our logic answer.
     result = str(result)
@@ -39,17 +38,11 @@ def sec25(userprems, userconcl):
     if userprems.lower() == 'd' or userprems.lower() == 'demo':
         userprems = testpremises
         userconcl = testconclusion
-        st.toast("### **Demo Premises:**\n {}\n### **Conclusion:**\n {}".format(userprems, userconcl))
     deliverable = section_25(userprems, userconcl)
     valid = deliverable[0]
     text = deliverable[1]
     st.session_state.regex_sec25 = str(valid) + '\n' + text
 
-
-def demo25():
-    testpremises = '''If the fish is Kosher then the fish has fins and the fish has scales. If the fish has fins and the fish has scales then the fish is Kosher. If the fish has scales then the fish has fins.''' 
-    testconclusion = "If the fish has scales, then the fish is Kosher."
-    return
 
 def clearregex():
     st.session_state.regex_schema = ''
@@ -81,47 +74,58 @@ st.markdown('''
 
 # LOGICBOT 1.0
 st.header("First Iteration: LogicBot 1.0 - Propositional Logic")
-st.markdown("As a proof of concept, I started by integrating Peter Norvig's [regular-expression propositional logic code](https://colab.research.google.com/github/norvig/pytudes/blob/master/ipynb/PropositionalLogic.ipynb) with [SymPy](https://docs.sympy.org/latest/modules/logic.html), a Python package that can check schematized arguments for ***satisfiability***.")
-st.markdown("A proposition -- like _P AND ~Q_ --  is ***satisfiable*** if there's at least one consistent truth-assignment for all the literals (variables) in the proposition. In this case, if P were True, and Q were False, then _P AND ~Q_ would evaluate to True -- this assignment ***satisfies*** that schema.")
-
+introduction, legend = st.columns(2)
+with introduction:
+    st.markdown("As a proof of concept, I started by integrating Peter Norvig's [regular-expression propositional logic code](https://colab.research.google.com/github/norvig/pytudes/blob/master/ipynb/PropositionalLogic.ipynb) with [SymPy](https://docs.sympy.org/latest/modules/logic.html), a Python package that can check schematized arguments for ***satisfiability***.")
+    st.markdown("A proposition -- like _P & ~Q_ --  is ***satisfiable*** if there's at least one consistent truth-assignment for all the literals (variables) in the proposition. In this case, if P were True, and Q were False, then _P & ~Q_ would evaluate to True -- this assignment ***satisfies*** that schema.")
+with legend:
+    st.markdown("Here's a key of the logical operators you'll see on this page:")
+    st.markdown("""| Operator | Symbol | Another Form |
+| ---------------- | ------ | ---------- |
+| NOT              | -      | ~          |
+| AND              | •      | &          |
+| OR               | v      | \|         |
+| THEREFORE        | >      | >>         |
+| BICONDITIONAL    | ≡      | << >>          |""")
 st.subheader("Try the LogicBot Out:")
 st.markdown("The first iteration of the logicbot can (1) 'schematize' english sentences and (2) prove whether a set of premises, as english sentences, imply a conclusion.")
+st.markdown("Add your own sentences in English below, or click the 'Demo' buttons to see how the LogicBot works with the given examples!")
 
 schema, col25 = st.columns(2)
 with schema:
     # I/O
     st.subheader("Translate English to Logic")
-    schemavalue = st.text_input("Input English Sentence:", key="schema_input")
+    schemavalue = st.text_input("Input English Sentence:", key="schema_input", placeholder="Example: If you liked it, then you shoulda put a ring on it.")
     one, two, third = st.columns(3)
     with one:
-        schema_button = st.button("Translate", help="Click me to schematize this sentence.")
+        schema_button = st.button("Translate", help="Click me to schematize this sentence.", use_container_width=True)
         if schema_button:
             regexSchema(schemavalue)
     with two:
-        demo_button = st.button("Demo", key="demo_schema", help="Click me to demonstrate!")
+        demo_button = st.button("Demo", key="demo_schema", help="Click me to demonstrate!", use_container_width=True)
         if demo_button:
             regexSchema("demo")
     with third:
-        delete_button = st.button("Clear All", key=3, help="Click me to clear all fields!")
+        delete_button = st.button("Clear All", key=3, help="Click me to clear all fields!", use_container_width=True)
         if delete_button:
             st.session_state.regex_schema = ''
     st.text_area(label="Schematized Sentence(s)", key="regex_schema")
 with col25:
     # I/O
     st.subheader("Test if Premises imply Conclusion")
-    sec25prems = st.text_area("Input Premise(s):", key="premise_input")
-    sec25concl = st.text_input("Input Conclusion:", key="conclusion_input")
+    sec25prems = st.text_area("Input Premise(s):", key="premise_input", placeholder="Example: (1) If the fish is Kosher then the fish has fins and the fish has scales. (2) If the fish has fins and the fish has scales then the fish is Kosher. (3) If the fish has scales then the fish has fins.")
+    sec25concl = st.text_input("Input Conclusion:", key="conclusion_input", placeholder="If the fish has scales, then the fish is Kosher.")
     three, four, sixth = st.columns(3)
     with three:
-        sec25_button = st.button("Test for Implication", help="Use Goldfarb's Method of Section 25!")
+        sec25_button = st.button("Test for Implication", help="Use Goldfarb's Method of Section 25!", use_container_width=True)
         if sec25_button:
             sec25(sec25prems, sec25concl)
     with four:
-        demo_button = st.button("Demo", key="demo_sec25", help="Click me to demonstrate!")
+        demo_button = st.button("Demo", key="demo_sec25", help="Click me to demonstrate!", use_container_width=True)
         if demo_button:
             sec25("demo", "demo")
     with sixth:
-        delete_button = st.button("Clear All", key=2, help="Click me to clear all fields!")
+        delete_button = st.button("Clear All", key=2, help="Click me to clear all fields!", use_container_width=True)
         if delete_button:
             st.session_state.regex_sec25 = ''
     st.text_area(label="Solved for Validity", key="regex_sec25")
@@ -166,15 +170,15 @@ Qx = x is a Poet
 Rx = x is in the Accelerated Program   
 Sx = x received an A+    """)
 # INPUT TEXT
-theysay = st.text_area("Input a sentence here using predicate logic:")
+theysay = st.text_area("Input a sentence here using predicate logic:", placeholder="All smart farmers are either German or Hungarian. Therefore, either somebody smart is not a farmer, or everyone is either German or Hungarian.")
 # BUTTONS
 five, six, eighth = st.columns(3)
 with five:
-    schema_button = st.button("Schematize", help="Input text above, and click me to schematize!")
+    schema_button = st.button("Schematize", help="Input text above, and click me to schematize!", use_container_width=True)
 with six:
-    demo_button = st.button("Demo", key="predicate_demo", help="Click me to demonstrate!")
+    demo_button = st.button("Demo", key="predicate_demo", help="Click me to demonstrate!", use_container_width=True)
 with eighth:
-    delete_button = st.button("Clear All", key=4, help="Click me to clear all fields!")
+    delete_button = st.button("Clear All", key=4, help="Click me to clear all fields!", use_container_width=True)
 
 if schema_button:
     nlpProcess(theysay)

@@ -5,8 +5,6 @@ st.title("The Culture War for the Planet")
 st.header('Comparative analysis of r/collapse, r/preppers, r/itcouldhappenhere, and r/climate')
 st.divider()
 
-st.info("this work is still ongoing! check back for updates :)")
-
 # RESEARCH MOTIVATIONS
 st.header("Research Motivations:")
 st.subheader("What's going on on with r/Collapse?")
@@ -42,11 +40,18 @@ st.markdown("_These were used to train various hate speech models, including the
 # ANALYSIS HEADER
 st.header("Analysis - Semantic Similarity, Topic Modeling (Ongoing Work)")
 
-st.markdown("Yeah, you want to skip to the good stuff. I've done the Topic Modeling, but not the Comparative Analysis, so see below for a visualization of the former:")
+st.markdown("To skip ahead to my work so far - I've gotten a preliminary vizualization of the topics discussed by Redditors in the various climate-related subreddits. See this link for an interactive graph:")
 
-st.link_button(label="click me!", url="https://jaidasgithubaccount.github.io/data_visualizations/", icon='📊')
+left, middle, right = st.columns(3)
+with middle:
+  st.link_button(label="click me!", url="https://jaidasgithubaccount.github.io/data_visualizations/", icon='📊', use_container_width=True)
 
-st.markdown("But if you want to know what you're looking at...")
+st.markdown("""Notable comment topics:   
+            - Migration and Refugee Status (Topic 12): keywords 'Haiti', 'People', 'Country'   
+            - The COVID-19 Pandemic (Topic 6): keywords 'covid', 'insurance', 'virus'  
+            - U.S. (Conservative) Politics (Topic 1): keywords 'trump', 'people', 'just'""")
+
+st.markdown("But if you want to learn more about what you're looking at in the graph at the link above...")
 
 # TOPIC MODELING - BERTOPIC VIZ
 st.subheader("Topic Modeling - setting up BERTopic")

@@ -15,8 +15,6 @@ from nltk import word_tokenize, pos_tag
 from nltk.tokenize import sent_tokenize
 from collections import defaultdict #no keyerrors!
 
-import time
-
 #sample text for debugging
 longexample = "If a farmer who owns cows sells milk then he either does not drink it or he takes a loss."
 example = "If I go to the movies, I'll bring home popcorn."
