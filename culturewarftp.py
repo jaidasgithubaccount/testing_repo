@@ -91,7 +91,7 @@ st.markdown(""" I'm looking to solve the following kinds of questions:
 3. How did the COVID-19 pandemic affect users' rhetoric regarding:  
 a. public trust/the social contract  
 b. resource hoarding (stockpiling goods)   
-c. world outlook ()
+c. world outlook (optimism vs. pessimism, trust vs. distrust)
 """)
 
 # MORE WORK
