@@ -2,7 +2,7 @@ import streamlit as st
 
 # Show title and description.
 st.title("The Culture War for the Planet 🌎")
-st.header('Comparative analysis of r/collapse, r/preppers, r/itcouldhappenhere, and r/climate', divider="blue")
+st.header('Comparative analysis of Reddit forums r/collapse, r/preppers, r/itcouldhappenhere, and r/climate', divider="blue")
 
 # RESEARCH MOTIVATIONS
 st.header("Research Motivations:")
@@ -12,6 +12,12 @@ st.markdown("In our worsening climate catastrophe, I've noticed the growth of a 
 
 st.markdown("The r/Collapse subreddit is filled with people deriving a number of narratives about the eventual collapse of modern society. I'm aiming to see what these narratives *are*. finding through-lines and AI-classified* similarities between different authors' positions, and being able to map out the rhetorical 'state space' - with an eye out for any other information I can pick up.")
 st.caption("\*_Aiming not to over-use high-compute power AI models for this, a pet project that's meant to be about saving the planet. See the **Climate-Conscious Compuatation** page for more._")
+# SNEAK PEEK
+left, middle, right = st.columns([0.15, 0.7, 0.15])
+with middle:
+  st.markdown("See [below]() for a sneak peek at the data collected so far:")
+  st.link_button(label="Redditors' takes on the climate catastrophe", url="https://jaidasgithubaccount.github.io/data_visualizations/", icon='📊', use_container_width=True)
+
 
 # RESEARCH QUESTION
 st.header("Research Question")
@@ -21,29 +27,28 @@ st.markdown("And of course, I'm comparatively analyzing the four subreddits to d
 
 # DATA SOURCES + COLLECTION
 st.header("Data Sources + Data Collection")
-st.subheader("Where did I get this information, _and why does it help answer our questions?_")
+with st.expander("**Where did I get this information, and why does it help answer our questions?**"):
+  st.markdown("1. **The Reddit Comments**")
+  st.markdown("""I pulled 16,000 of the top comments and text posts of all time from r/collapse, r/preppers, r/itcouldhappenhere and r/climate, using [Praw](https://github.com/praw-dev/praw). Comments were mostly from the years after 2018, but the earliest post is from 2016.""")   
+  st.markdown("_The Reddit comments are the backbone of my analysis - their text content will be analyzed for abusive language._")
 
-st.markdown("1. **The Reddit Comments**")
-st.markdown("""I pulled 16,000 of the top comments and text posts of all time from r/collapse, r/preppers, r/itcouldhappenhere and r/climate, using [Praw](https://github.com/praw-dev/praw).  
-_Comments were mostly from the years after 2018, but the earliest post is from 2016. This inadvertently captures 3 presidential tenures (Trump, Biden, Trump) - the early results make me think this is relevant!_""")
+  st.markdown("**In order to classify the text I'd pulled as abusive language, or to determine the attitude toward climate change (opportunity vs. risk) in the text, I relied on machine learning models that had been pre-trained on other datasets...**")
 
+  st.markdown("2. [ClimateBERT Climate Change Sentiment Dataset](https://huggingface.co/datasets/climatebert/climate_sentiment)")
+  st.markdown("_This dataset was used to train the [ClimateBERT](https://huggingface.co/climatebert/distilroberta-base-climate-sentiment) classification model for climate opportunity and risk._")
 
-st.markdown("In order to classify the text I'd pulled as abusive language, or to determine the attitude toward climate change (opportunity vs. risk) in the text, I relied on machine learning models that had been pre-trained on other datasets...")
-
-st.markdown("2. [ClimateBERT Climate Change Sentiment Dataset](https://huggingface.co/datasets/climatebert/climate_sentiment)")
-st.markdown("_This dataset was used to train the [ClimateBERT](https://huggingface.co/climatebert/distilroberta-base-climate-sentiment) classification model for climate opportunity and risk._")
-
-st.markdown("3. [IndicAbusive Datasets](https://github.com/hate-alert/IndicAbusive/tree/main/Dataset)")
-st.markdown("_These were used to train various hate speech models, including the [English-Abusive-MuRIL](https://huggingface.co/Hate-speech-CNERG/english-abusive-MuRIL?text=...+%40THErealDVORAK+And+man-made+global+warming+will+never+warm+the+moon%2C+sun%2C+and+stars.+End+times+are+controlled+by+God+-+not+by+carbon) classification model I used in my research._")
+  st.markdown("3. [IndicAbusive Datasets](https://github.com/hate-alert/IndicAbusive/tree/main/Dataset)")
+  st.markdown("_These were used to train various hate speech models, including the [English-Abusive-MuRIL](https://huggingface.co/Hate-speech-CNERG/english-abusive-MuRIL?text=...+%40THErealDVORAK+And+man-made+global+warming+will+never+warm+the+moon%2C+sun%2C+and+stars.+End+times+are+controlled+by+God+-+not+by+carbon) classification model I used in my research._")
 
 # ANALYSIS HEADER
-st.header("Analysis - Semantic Similarity, Topic Modeling (Ongoing Work)")
+st.header("Analysis - Semantic Similarity and Topic Modeling, Comparative Analysis")
+st.info("This work is still ongoing. Check back later for more updates!")
 
 st.markdown("I've gotten a preliminary vizualization of the topics discussed by Redditors in the various climate-related subreddits. See this link for an interactive graph:")
 
 left, middle, right = st.columns([0.15, 0.7, 0.15])
 with middle:
-  st.link_button(label="Redditors' takes on the climate catastrophe", url="https://jaidasgithubaccount.github.io/data_visualizations/", icon='📊', use_container_width=True)
+  st.link_button(label="Redditors' Takes on the Climate Catastrophe", url="https://jaidasgithubaccount.github.io/data_visualizations/", icon='📊', use_container_width=True)
 
 st.markdown("""Notable comment topics and keywords found in subreddit comments:   
 - :blue[**Migration and Refugee Status**] **(Topic 12):** keywords 'Haiti', 'people', 'country'   

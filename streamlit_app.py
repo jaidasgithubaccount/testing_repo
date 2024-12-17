@@ -11,6 +11,7 @@ def Home():
     st.page_link("logicbot.py", label="LogicBot", icon='🦾')
     st.markdown("Argument-Strength Analyzer _(takes a few seconds to load!)_")
     st.markdown("**Helping me learn:** Basic Natural Language Processing (tokenization, lemmatization, noun phrase chunking); applied logic")
+    st.divider()
     st.header("Institutional Work")
     st.markdown("**Surfing the Kali Yuga: Tracking the Alt-Right on Twitter (2023)**")
     st.markdown("*Bowdoin College Digital Commons*")
