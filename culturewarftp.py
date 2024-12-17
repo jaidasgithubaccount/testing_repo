@@ -41,7 +41,7 @@ with st.expander("**Where did I get this information, and why does it help answe
   st.markdown("_These were used to train various hate speech models, including the [English-Abusive-MuRIL](https://huggingface.co/Hate-speech-CNERG/english-abusive-MuRIL?text=...+%40THErealDVORAK+And+man-made+global+warming+will+never+warm+the+moon%2C+sun%2C+and+stars.+End+times+are+controlled+by+God+-+not+by+carbon) classification model I used in my research._")
 
 # ANALYSIS HEADER
-st.header("Analysis - Semantic Similarity and Topic Modeling, Comparative Analysis")
+st.header("Analysis - Topic Modeling and Text Classification")
 st.info("This work is still ongoing. Check back later for more updates!")
 
 st.markdown("I've gotten a preliminary vizualization of the topics discussed by Redditors in the various climate-related subreddits. See this link for an interactive graph:")
@@ -68,27 +68,26 @@ st.markdown("""The original dataset had 15807 topics; using BERTopic's reduce_to
 """)
 
 # COMPARATIVE ANALYSIS - TEXT CLASSIFIERS
-st.subheader("Comparative Analysis - setting up the text classifiers")
-st.markdown("""There are two kinds of comparative analysis:
-- Analyzing BERTopic topics by subreddit, with the BERTopic 'vector database' built by that Python module:
+st.subheader("Text Classification - comparing subreddits")
+st.markdown("""I'll perform two 'buckets' of comparative analysis:
+- **Vector Database comparative analysis:** Analyzing BERTopic topics by subreddit, with the BERTopic 'vector database' built by that Python module:
   - this will help determine whether certain topics are unique to a given climate-subreddit. (Unlikely that any of the top 10 topics in the vizualization linked above are uniqe to one subreddit, but others might be!)
-- Other data analysis, performed by augmenting a master data structure (pandas DataFrame, or .csv file) with algorithmically-derived classification, like:
+- **Other Database analysis:** This is performed by augmenting a master data structure (pandas DataFrame, or .csv file) with algorithmically-derived classification, like:
 	- whether the text contains abusive language
 	- whether the text treats the climate as an opportunity/risk
   - psychological state of the user (optimistic vs. pessimistic, trusting vs. distrustful)
 """)
 
-st.markdown("""I'm still chugging along on the Topics by Class analysis (there are more tweaks I want to do to the underlying BERTopic model), but have also been exploring classifiers to help with the other data analysis.
-""")
-
-st.markdown("""These are the Huggingface models I'm using for my text classification:
-1) classifying abusive language: [Hate-speech-CNERG/english-abusive-MuRIL](https://huggingface.co/Hate-speech-CNERG/english-abusive-MuRIL)
-2) classifying climate opportunity/risk: [climatebert/distilroberta-base-climate-sentiment](https://huggingface.co/climatebert/distilroberta-base-climate-sentiment)
-3) classifying social adaptivity - optimism/pessimism and trust/disgust: [ayoubkirouane/BERT-Emotions-Classifier](https://huggingface.co/ayoubkirouane/BERT-Emotions-Classifier?text=This+is+a+basic+reddit+comment.)
-""")
-
+st.markdown("""There are more tweaks I want to do to the underlying BERTopic model before I can get to **vector database analysis**, so I begin with **other database analysis** below.""")
 st.markdown("""To classify the original reddit comments, I utilize HuggingFace's [transformers](https://github.com/huggingface/transformers), specifically the `pipeline` API wrapper, which simplifies the workflow tremendously. 
 """)
+with st.expander("**These are the Huggingface models I'm using for my text classification:**"):
+  st.markdown("""
+1) Classifying :blue-background[abusive language]: [Hate-speech-CNERG/english-abusive-MuRIL](https://huggingface.co/Hate-speech-CNERG/english-abusive-MuRIL)
+2) Classifying :blue-background[climate opportunity/risk]: [climatebert/distilroberta-base-climate-sentiment](https://huggingface.co/climatebert/distilroberta-base-climate-sentiment)
+3) Classifying social adaptivity - :blue-background[optimism vs. pessimism] and :blue-background[trust v. disgust]: [ayoubkirouane/BERT-Emotions-Classifier](https://huggingface.co/ayoubkirouane/BERT-Emotions-Classifier?text=This+is+a+basic+reddit+comment.)
+""")
+
 
 st.markdown(""" I'm looking to solve the following kinds of questions:
 1. Which subreddits have the most instances of abusive language?
