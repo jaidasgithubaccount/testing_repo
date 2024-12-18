@@ -4,13 +4,13 @@ import os
 def Home():
 # Show title and description.
     st.title("Jaida's Publicly-Available Work")
-    st.header("Personal Projects (Ongoing Work)")
+    st.header("Personal Projects:")
     st.page_link("culturewarftp.py", label="The Culture War for the Planet", icon="🌎")
-    st.markdown("Comparative analysis of popular climate-related subreddits")
-    st.markdown("**Helping me learn:** Intermediate Natural Language Processing - Topic Modeling, Semantic Similarity Analysis")
+    st.markdown("_Comparative analysis of popular climate-related subreddits._")
+    st.markdown("**Helping me learn:** Topic Modeling, Semantic Similarity Analysis")
     st.page_link("logicbot.py", label="LogicBot", icon='🦾')
-    st.markdown("Argument-Strength Analyzer _(takes a few seconds to load!)_")
-    st.markdown("**Helping me learn:** Basic Natural Language Processing (tokenization, lemmatization, noun phrase chunking); applied logic")
+    st.markdown("_Argument-Strength Analyzer_")
+    st.markdown("**Helping me learn:** Basic natural language processing (noun phrase chunking), Applied logic")
     st.divider()
     st.header("Institutional Work")
     st.markdown("**Surfing the Kali Yuga: Tracking the Alt-Right on Twitter (2023)**")

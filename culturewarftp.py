@@ -15,9 +15,7 @@ st.caption("\*_Aiming not to over-use high-compute power AI models for this, a p
 # SNEAK PEEK
 left, middle, right = st.columns([0.15, 0.7, 0.15])
 with middle:
-  st.markdown("See [below]() for a sneak peek at the data collected so far:")
-  st.link_button(label="Redditors' takes on the climate catastrophe", url="https://jaidasgithubaccount.github.io/data_visualizations/", icon='📊', use_container_width=True)
-
+  st.markdown("See [below](#analysis-topic-modeling-and-text-classification) for a sneak peek at the data collected so far!")
 
 # RESEARCH QUESTION
 st.header("Research Question")

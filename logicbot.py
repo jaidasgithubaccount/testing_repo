@@ -59,8 +59,15 @@ st.title("LogicBot 🦾")
 st.header("Argument-strength Analyzer", divider="red")
 
 st.header("... what's that?")
-st.text("The LogicBot uses regular expressions to translate English sentences into Propositional Logic Schemata.")
-st.markdown("**Propositional Logic** refers to the logical relationships between phrases that can be true or false, aka *propositions*.")
+st.markdown("The LogicBot reads English sentences and arguments and evaluates them for their strength, by using regular expressions aided by natural language processing methods. It's an ongoing, iterative project that I've been working on in the background since my sophomore year!")
+firstcol, secondcol = st.columns(2)
+with firstcol:
+    st.markdown("The iterations below handle Propositional Logic and Predicate Logic. Scroll down to read about the evolution of the LogicBot, or click the links below to jump to the LogicBot iteration you'd like to try out:")
+    st.markdown(""":blue-background[[Try **LogicBot 1.0** - Propositional Logic](#try-the-logicbot-out)]   
+    :blue-background[[Try **LogicBot 2.0** - Predicate Logic](#try-logicbot-2-0-out)]""")
+with secondcol:
+    st.markdown(":red-background[**Propositional Logic**] refers to the logical relationships between phrases that can be true or false, aka *propositions*.")
+    st.markdown(":red-background[**Predicate Logic**] refers to the logical relationships of propositions within a given Universe of Discourse (or domain).")
 
 # PROJECT MOTIVES
 st.header("Project Motivations:")
@@ -72,7 +79,8 @@ st.markdown('''
             ''')
 
 # LOGICBOT 1.0
-st.header("First Iteration: LogicBot 1.0 - Propositional Logic")
+st.header("LogicBot 1.0 - Propositional Logic")
+st.subheader("_Using Regular Expressions_")
 introduction, legend = st.columns(2)
 with introduction:
     st.markdown("As a proof of concept, I started by integrating Peter Norvig's [regular-expression propositional logic code](https://colab.research.google.com/github/norvig/pytudes/blob/master/ipynb/PropositionalLogic.ipynb) with [SymPy](https://docs.sympy.org/latest/modules/logic.html), a Python package that can check schematized arguments for ***satisfiability***.")
@@ -90,7 +98,7 @@ st.subheader("Try the LogicBot Out:")
 st.markdown("The first iteration of the logicbot can (1) 'schematize' english sentences and (2) prove whether a set of premises, as english sentences, imply a conclusion.")
 st.markdown("Add your own sentences in English below, or click the 'Demo' buttons to see how the LogicBot works with the given examples!")
 
-schema, col25 = st.columns(2)
+schema, col25 = st.tabs(["Translate English to Logic", "Test if Premises Imply Conclusion"])
 with schema:
     # I/O
     st.subheader("Translate English to Logic")
@@ -136,25 +144,33 @@ st.markdown("""Here's an out-of-the box NLI way to check for soundness, if you d
             1. download the relevant packages and dependencies for [Google's Gemini AI API](https://ai.google.dev/gemini-api/docs)  
             2. run a _model.generate_content()_ call with each proposition (or predicate clause) added as an input to a generic 'is X proposition true?' search query. 
             
-But, that'd be computationally intense, and I'm trying to save the planet, so I'm not likely to add a 'soundness verifier' to the LogicBot anytime soon.""")
+But, that'd be computationally intense, and I'm trying to save the planet, so...""")
+st.page_link("climate_conscious_comp.py", label="I'm not adding a 'soundness verifier' to the LogicBot anytime soon.", use_container_width=True)
 
 # LOGICBOT 2.0
-st.header("Future Iterations: Predicate Logic (with NLP)")
-st.markdown("Future iterations of the LogicBot might utilize natural language processing to determine the ***Universe of Discourse*** and ***Scope of Discourse*** for certain sentences. The Universe of Discourse refers to the kinds of things enclosed by a variable like 'x' in a schema. The Scope refers to whether one refers to *all* elements in the universe, or only *some*.")
+st.header("LogicBot 2.0: Predicate Logic")
+st.subheader("_Now With Natural Language Processing!_")
+st.markdown("Future iterations of the LogicBot will utilize natural language processing to determine the ***Universe of Discourse*** and ***Scope of Discourse*** for certain sentences. The Universe of Discourse refers to the kinds of things enclosed by a variable like 'x' in a schema. The Scope refers to whether one refers to *all* elements in the universe, or only *some*.")
 st.markdown("Here's how a similar concept might be understood with different scopes of discourse:") 
-st.markdown('''
+table, lits = st.columns([0.8, 0.2])
+with table:
+    st.markdown('''
 | Type                                     | Sentence                  | Schema       |
 | ---------------------------------------- | ------------------------- | ------------ |
 | **Propositional Logic (named variable)** | Paul is a firefighter.    | Fp           |
 | **Predicate Logic - Existential Scope**  | There is a firefighter.   | (Ǝx)(Fp)     |
 | **Predicate Logic - Universal scope**    | Everyone's a firefighter. | (∀x)(x > Fx) |
-            ''')
-st.caption("""**LITERALS:**   
+''')
+with lits:
+    st.caption("""**LITERALS:**   
 Fx = x is a Firefighter  
-p= Paul""")
-st.markdown("... and different universes:") 
-st.markdown('''
-**Sentence:** All poets in the accelerated program received an A+.
+p = Paul""")
+    
+st.markdown("... and different universes:")
+antable, anlits = st.columns([0.8, 0.2])
+with antable:
+    st.markdown('''
+:red-background[**Sentence:** All poets in the accelerated program received an A+.]
 | Universe of Discourse              | Schema                  |
 | ---------------------------------- | ----------------------- |
 | **Everyone and Every Thing**       | (∀x)(Px ⋀ Qx ⋀ Rx > Sx) |
@@ -162,12 +178,14 @@ st.markdown('''
 | **Poets (*assumed to be People*)** | (∀x)(Rx > Sx)           |
 | **Accelerated Program Poets**      | (∀x)(x > Sx)            |          
 ''')
-st.caption("""**LITERALS:**   
+with anlits:
+    st.caption("""**LITERALS:**   
 Px = x is a Person  
 Qx = x is a Poet   
 Rx = x is in the Accelerated Program   
 Sx = x received an A+    """)
 # INPUT TEXT
+st.subheader("Try LogicBot 2.0 Out:")
 theysay = st.text_area("Input a sentence here using predicate logic:", placeholder="All smart farmers are either German or Hungarian. Therefore, either somebody smart is not a farmer, or everyone is either German or Hungarian.")
 # BUTTONS
 five, six, eighth = st.columns(3)
