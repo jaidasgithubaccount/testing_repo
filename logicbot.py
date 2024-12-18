@@ -59,7 +59,7 @@ st.title("LogicBot 🦾")
 st.header("Argument-strength Analyzer", divider="red")
 
 st.header("... what's that?")
-st.markdown("The LogicBot reads English sentences and arguments and evaluates them for their strength, by using regular expressions aided by natural language processing methods. It's an ongoing, iterative project that I've been working on in the background since my sophomore year!")
+st.markdown("The LogicBot :red-background[reads English sentences] and arguments and :red-background[evaluates them for their strength] by using regular expressions aided by natural language processing methods. It's an ongoing, iterative project that I've been working on in the background since my sophomore year!")
 firstcol, secondcol = st.columns(2)
 with firstcol:
     st.markdown("The iterations below handle Propositional Logic and Predicate Logic. Scroll down to read about the evolution of the LogicBot, or click the links below to jump to the LogicBot iteration you'd like to try out:")
