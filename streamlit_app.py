@@ -8,6 +8,7 @@ def Home():
     col1, col2 = st.columns(2)
     with col1:
         st.page_link("culturewarftp.py", label="The Culture War for the Planet", icon="🌎")
+        st.image("https://ibb.co/6gL81YR")
         st.markdown("_Comparative analysis of popular climate-related subreddits._")
         st.markdown("**Helping me learn:** Topic Modeling, Semantic Similarity Analysis")
     with col2:
