@@ -155,7 +155,7 @@ def proposition_name(sentence, defs, names='PQRSTUVWXYZBCDEFGHJKLMN'):
     
 def clean(text): 
     "Remove redundant whitespace; handle curly apostrophe and trailing comma/period."
-    return ' '.join(text.split()).replace("’", "'").rstrip('.').rstrip(',')
+    return ' '.join(text.split()).replace("’", "'").rstrip('.').rstrip(',').lower()
 
 """
 MIT License
