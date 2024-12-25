@@ -4,28 +4,66 @@ import streamlit as st
 st.title("The Culture War for the Planet 🌎")
 st.header('Comparative analysis of Reddit forums r/collapse, r/preppers, r/itcouldhappenhere, and r/climate', divider="blue")
 
-# RESEARCH MOTIVATIONS
-st.header("Research Motivations:")
-st.subheader("What's going on on with r/Collapse?")
-
-st.markdown("In our worsening climate catastrophe, I've noticed the growth of a particular doomerist subreddit - r/collapse - and, perhaps more notably, the spread of its doomer rhetoric to other, less-controversial climate related subreddits, like r/preppers, r/itcouldhappenhere, and r/climate.")
-
-st.markdown("The r/Collapse subreddit is filled with people deriving a number of narratives about the eventual collapse of modern society. I'm aiming to see what these narratives *are*. finding through-lines and AI-classified* similarities between different authors' positions, and being able to map out the rhetorical 'state space' - with an eye out for any other information I can pick up.")
-st.caption("\*_Aiming not to over-use high-compute power AI models for this, a pet project that's meant to be about saving the planet. See the **Climate-Conscious Compuatation** page for more._")
 # SNEAK PEEK
 left, middle, right = st.columns([0.15, 0.7, 0.15])
 with middle:
   st.markdown("See [below](#analysis-topic-modeling-and-text-classification) for a sneak peek at the data collected so far!")
 
-# RESEARCH QUESTION
-st.header("Research Question")
-st.subheader("Are there places online where you're more likely to fall down a climate doomer rabbit hole? _What makes the difference?_")
-st.markdown("This question has all sorts of component parts, but answering it will require a working definition of 'doomer' vs. non-doomer online spaces: I've decided to track the subreddits' **abusive language**, and whether the comments/posts in a subreddit see the changing climate as more of a **risk** to themsleves and others, or an **opportunity** to make money or secure power over others.")
-st.markdown("And of course, I'm comparatively analyzing the four subreddits to determine the relatively 'most/least' abusive ones, but I'll also be tracking any change in rhetoric related to climate over time (dataset collects Tweets and Reddit posts from 2018).")
+#TABS - 
 
+motives, thiscase, question, datasources = st.tabs(["Research Motivations", "What's r/Collapse?", "Research Questions", "Data Sources"])
+
+# RESEARCH MOTIVATIONS
+with motives:
+  st.header("Research Motivations:")
+  st.subheader("Modeling Climate Change and Social Conflict")
+  st.markdown("There's a new burgeoning theory on the contentious politics market - that :blue-background[climate change is a potential security pressure.]")
+  st.markdown("Much of the current research seeks to answer the foundational question -- :blue-background[**is there a link between climate pressures and social, political and/or economic unrest?**]")
+  st.markdown("To do so, researchers have tracked key metrics in various regions, evaluating communities' **climate risks**, **conflict risks** and **other infrastructural vulnerabilities** that might contribute to the next (inter)national crisis.")
+  st.markdown("My research builds on the scholarship. And I've got a hunch about one, _specific_ aspect of the connection between the climate and social conflict...")
+# SOCIAL MEDIA ANALYSIS - WHY THIS?
+  st.subheader("Social Media and the Climate-Conflict Connection")
+  st.markdown("Foreign governments can use dashboards like Germany's [Climate-Conflict Vulnerability Index](https://climate-conflict.org/www) to help predict what resources or infastructures to invest in or fortify, and where to send humanitarian aid in the case of large-scale unrest.")
+  st.markdown("But how can non-state actors -- scholars, activists, journalists, friends and family -- make sense of the socio-political effects that climate change may have on our communities?")
+
+  st.markdown("For most of us, the climate catastrophe is personal. Hurricanes, floods, heatwaves and cold snaps have personal significance; **many of us share our stories online.** By doing so, we're influenced by our social media networks. In turn, we help shape the global conversation.")
+
+  st.markdown("Politicians and bad-faith actors alike are listening and part of these online conversations, too: to the extent we put our votes and protests where our _twitter-fingers_ are, the rhetoric we use online mirrors world we build outside. In short, **the kinds of things we say about the climate may help determine whether our communities' attitudes of resilient cooperation will help us survive the climate catastrophe, or if anti-social infighting will tear our social fabric apart.** After all, social media sentiment analysis has proven a decent method of [ascertaining public opinion](https://doi.org/10.1016/j.dajour.2022.100073).")
+
+# ABOUT SUBREDDITS and COLLAPSE
+with thiscase:
+  st.subheader("So, what's going on on with r/Collapse?")
+  st.markdown("Reddit is a website that hosts various forums on specific topics - news, cat pictures, the TV show Firefly, et cetera.")
+  st.markdown("Popular among them are a cluster of climate-change related forums, starting with the notorious **r/collapse**. Collapse, the subreddit for 'climate fatalists,' has been known as the quintessential 'doomer' subreddit for as long as I've known of its existence (I first stumbled onto it in 2019).")
+  with st.popover("**[r/collapse disclaimer]**"):
+    st.markdown("Overindulging in this sub may be detrimental to your mental health. Anxiety and depression are common reactions when studying collapse. Please remain conscious of your mental health and effects this may have on you.If you are considering suicide, please call a hotline, visit r/SuicideWatch r/SWResources, r/depression, or seek professional help. If you are seeking support please visit r/CollapseSupport. Suicidal content will be removed. Suggesting others commit suicide will result in an immediate ban.")
+    st.caption("No joke.")
+  st.markdown("Users in the Collapse subreddit discuss the eventual collapse of modern society:")
+  st.markdown(""" 
+> The world isn't dying. People are killing it. And those people have names and addresses.   
+> _one anonymous user_
+""")
+  st.markdown("""            
+> Just participating in society is making many people feel drained and pessimistic. Everyone I know reports being tired and out of sorts, as one put it, regardless of their age or their social or economic standing. Progress was supposed to make everyone thrilled all the time by giving them endless possibilities, but it seems like the opposite has happened, and if collapse is the opposite of progress then collapse is the proper term for this.    
+> _another anonymous user_        
+""") 
+  st.markdown("In our worsening climate catastrophe, I've noticed the growth of r/collapse -- and, perhaps more notably, the spread of its doomer rhetoric to other, less-controversial climate related subreddits, like **r/preppers**, **r/itcouldhappenhere**, and **r/climate**.")
+  st.markdown("I'm aiming to find through-lines and AI-classified* similarities between different users' positions, across the four subreddits. I want to map out the rhetorical 'state space' - with an eye out for any other information I can pick up, like the relative popularity of certain approaches to climate change.")
+  st.caption("\*_Aiming not to over-use high-compute power AI models for this, a pet project that's meant to be about saving the planet. See the **Climate-Conscious Compuatation** page for more._")
+
+
+# RESEARCH QUESTION
+with question:
+  st.header("Research Questions")
+  st.subheader("1. Is there a link between climate pressures and social, political and/or economic unrest?")
+  st.subheader("2. Are there places online where you're more likely to fall down a climate doomer rabbit hole? _What makes the difference?_")
+  st.markdown("This question has all sorts of component parts, but answering it will require a working definition of 'doomer' vs. non-doomer online spaces: I've decided to track the subreddits' **abusive language**, and whether the comments/posts in a subreddit see the changing climate as more of a **risk** to themsleves and others, or an **opportunity** to make money or secure power over others.")
+  st.markdown("And of course, I'm comparatively analyzing the four subreddits to determine the relatively 'most/least' abusive ones, but I'll also be tracking any change in rhetoric related to climate over time (dataset collects Tweets and Reddit posts from 2018).")
+
+with datasources:
 # DATA SOURCES + COLLECTION
-st.header("Data Sources + Data Collection")
-with st.expander("**Where did I get this information, and why does it help answer our questions?**"):
+  st.header("Data Sources + Data Collection")
+  st.subheader("**Where did I get this information, and why does it help answer our questions?**")
   st.markdown("1. **The Reddit Comments**")
   st.markdown("""I pulled 16,000 of the top comments and text posts of all time from r/collapse, r/preppers, r/itcouldhappenhere and r/climate, using [Praw](https://github.com/praw-dev/praw). Comments were mostly from the years after 2018, but the earliest post is from 2016.""")   
   st.markdown("_The Reddit comments are the backbone of my analysis - their text content will be analyzed for abusive language._")
@@ -37,6 +75,9 @@ with st.expander("**Where did I get this information, and why does it help answe
 
   st.markdown("3. [IndicAbusive Datasets](https://github.com/hate-alert/IndicAbusive/tree/main/Dataset)")
   st.markdown("_These were used to train various hate speech models, including the [English-Abusive-MuRIL](https://huggingface.co/Hate-speech-CNERG/english-abusive-MuRIL?text=...+%40THErealDVORAK+And+man-made+global+warming+will+never+warm+the+moon%2C+sun%2C+and+stars.+End+times+are+controlled+by+God+-+not+by+carbon) classification model I used in my research._")
+
+st.divider()
+
 
 # ANALYSIS HEADER
 st.header("Analysis - Topic Modeling and Text Classification")

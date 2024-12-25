@@ -4,14 +4,15 @@ import os
 def Home():
 # Show title and description.
     st.title("Jaida's Publicly-Available Work")
-    st.header("Personal Projects:")
+    st.header("Personal Projects:", divider="rainbow")
     col1, col2 = st.columns(2)
     with col1:
+        st.image("/workspaces/testing_repo/IMG_2579.jpg", use_container_width=True)
         st.page_link("culturewarftp.py", label="The Culture War for the Planet", icon="🌎")
-        st.image("IMG_2579.jpg", use_container_width=True)
-        st.markdown("_Comparative analysis of popular climate-related subreddits._")
+        st.markdown("_Comparative analysis of popular climate-related forums on Reddit._")
         st.markdown("**Helping me learn:** Topic Modeling, Semantic Similarity Analysis")
     with col2:
+        st.image("/workspaces/testing_repo/hungryfarmers.jpeg", use_container_width=True)
         st.page_link("logicbot.py", label="LogicBot", icon='🦾')
         st.markdown("_Argument-Strength Analyzer_")
         st.markdown("**Helping me learn:** Basic natural language processing (noun phrase chunking), Applied logic")
