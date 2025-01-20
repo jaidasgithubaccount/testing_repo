@@ -18,7 +18,7 @@ motives, thiscase, question, datasources = st.tabs(["Research Motivations", "Wha
 # RESEARCH MOTIVATIONS
 with motives:
   st.subheader("Modeling Climate Change and Social Conflict")
-  st.markdown("There's a new burgeoning theory on the contentious politics market - that :blue-background[climate change is an (inter-)national security risk.]")
+  st.markdown("There's a new burgeoning theory on the contentious politics market - that :blue-background[climate change is a national and international security risk.]")
   st.markdown("Much of the current research seeks to answer the foundational question -- :blue-background[**is there a link between climate pressures and social, political and/or economic unrest?**]")
   st.markdown("To do so, researchers have tracked key metrics in various regions, evaluating communities' **climate risks**, **conflict risks** and **other infrastructural vulnerabilities** that might contribute to the next (inter)national crisis.")
   st.markdown("My research builds on the scholarship. And I've got a hunch about one, _specific_ aspect of the connection between the climate and social conflict...")
