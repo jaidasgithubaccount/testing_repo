@@ -1,7 +1,7 @@
 import streamlit as st
 
 # Show title and description.
-st.title("Climate-Conscious Computation 💻🕊️")
+st.title("Conscious Computation 💻🕊️")
 st.header("or, why I'm picky with my tech...", divider="green")
 
 st.markdown("""
@@ -17,5 +17,5 @@ To be clear:
 #### (Here's how) I'm mitigating any potential negative environmental/privacy-related externalities:   
 **Using pre-trained models for my text classification.** Training models takes up far more compute time/energy than querying them (... obviously), so for the classification of Reddit comments (as abusive, etc) I used pre-trained models. These models remained reliable because their application in my project is contained within the datasets used to train the models themselves - both models include significant dicussion of climate change in their training datasets.   
 
-**Anonymizing users' data, and refusing to make political or demographic inferences.** This protocol was borrowed from my review of Twitter's Terms of Service in early 2022, when I began my [honors project](https://digitalcommons.bowdoin.edu/honorsprojects/431/) in undergrad. Those TOS essentially forbade researchers from inferring (or otherwise deriving) users' **race, gender, sexual identity, religion, and/or political/ideological affiliation from their posts.** Instead, researchers were meant to assume posts spoke for themselves - that they did not necessarily reflect the truly held beliefs of the users who typed them. This is my working standard.
+**Anonymizing users' data, and refusing to make political or demographic inferences.** This protocol was borrowed from my review of Twitter's Terms of Service in early 2022, when I began my [honors project](https://digitalcommons.bowdoin.edu/honorsprojects/431/) in undergrad. Those TOS essentially forbade researchers from inferring (or otherwise deriving) users' **race, gender, sexual identity, religion, and/or political/ideological affiliation from their posts.** Instead, researchers were meant to assume posts spoke for themselves - that they did not necessarily reflect the truly held beliefs of the users who typed them. This is my working standard: links, usernames, and other identifying information will all be scrubbed from publicly-available text!
 """)

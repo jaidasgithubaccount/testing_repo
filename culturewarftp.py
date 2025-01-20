@@ -2,7 +2,7 @@ import streamlit as st
 
 # Show title and description.
 st.title("The Culture War for the Planet 🌎")
-st.header('Comparative analysis of Reddit forums r/collapse, r/preppers, r/itcouldhappenhere, and r/climate', divider="blue")
+st.header('Comparative analysis of Reddit forums r/collapse, r/preppers, r/itcouldhappenhere, r/climate and r/climatechange', divider="blue")
 
 # SNEAK PEEK
 left, middle, right = st.columns([0.15, 0.7, 0.15])
@@ -10,12 +10,11 @@ with middle:
   st.markdown("See [below](#analysis-topic-modeling-and-text-classification) for a sneak peek at the data collected so far!")
 
 #TABS - 
-
+st.header("Background")
 motives, thiscase, question, datasources = st.tabs(["Research Motivations", "What's r/Collapse?", "Research Questions", "Data Sources"])
 
 # RESEARCH MOTIVATIONS
 with motives:
-  st.header("Research Motivations:")
   st.subheader("Modeling Climate Change and Social Conflict")
   st.markdown("There's a new burgeoning theory on the contentious politics market - that :blue-background[climate change is a potential security pressure.]")
   st.markdown("Much of the current research seeks to answer the foundational question -- :blue-background[**is there a link between climate pressures and social, political and/or economic unrest?**]")
@@ -54,7 +53,7 @@ with thiscase:
 
 # RESEARCH QUESTION
 with question:
-  st.header("Research Questions")
+  st.subheader("Research Questions:")
   st.subheader("1. Is there a link between climate pressures and social, political and/or economic unrest?")
   st.subheader("2. Are there places online where you're more likely to fall down a climate doomer rabbit hole? _What makes the difference?_")
   st.markdown("This question has all sorts of component parts, but answering it will require a working definition of 'doomer' vs. non-doomer online spaces: I've decided to track the subreddits' **abusive language**, and whether the comments/posts in a subreddit see the changing climate as more of a **risk** to themsleves and others, or an **opportunity** to make money or secure power over others.")
@@ -62,7 +61,6 @@ with question:
 
 with datasources:
 # DATA SOURCES + COLLECTION
-  st.header("Data Sources + Data Collection")
   st.subheader("**Where did I get this information, and why does it help answer our questions?**")
   st.markdown("1. **The Reddit Comments**")
   st.markdown("""I pulled 16,000 of the top comments and text posts of all time from r/collapse, r/preppers, r/itcouldhappenhere and r/climate, using [Praw](https://github.com/praw-dev/praw). Comments were mostly from the years after 2018, but the earliest post is from 2016.""")   
@@ -75,7 +73,6 @@ with datasources:
 
   st.markdown("3. [IndicAbusive Datasets](https://github.com/hate-alert/IndicAbusive/tree/main/Dataset)")
   st.markdown("_These were used to train various hate speech models, including the [English-Abusive-MuRIL](https://huggingface.co/Hate-speech-CNERG/english-abusive-MuRIL?text=...+%40THErealDVORAK+And+man-made+global+warming+will+never+warm+the+moon%2C+sun%2C+and+stars.+End+times+are+controlled+by+God+-+not+by+carbon) classification model I used in my research._")
-
 st.divider()
 
 
@@ -83,32 +80,38 @@ st.divider()
 st.header("Analysis - Topic Modeling and Text Classification")
 st.info("This work is still ongoing. Check back later for more updates!")
 
-st.markdown("I've gotten a preliminary vizualization of the topics discussed by Redditors in the various climate-related subreddits. See this link for an interactive graph:")
+st.markdown("I've gotten some preliminary vizualizations of the topics discussed by Redditors in the various climate-related subreddits. See this link to explore interactive graphs:")
 
 left, middle, right = st.columns([0.15, 0.7, 0.15])
 with middle:
-  st.link_button(label="Redditors' Takes on the Climate Catastrophe", url="https://jaidasgithubaccount.github.io/data_visualizations/", icon='📊', use_container_width=True)
+  st.page_link("culturewar_explore.py", label="Explore the Culture War", icon="🗺️")
 
-st.markdown("""Notable comment topics and keywords found in subreddit comments:   
-- :blue[**Migration and Refugee Status**] **(Topic 12):** keywords 'Haiti', 'people', 'country'   
-- :orange[**The COVID-19 Pandemic**] **(Topic 6):** keywords 'covid', 'insurance', 'virus'  
-- :green[**Conservative Politics**] **(Topic 1):** keywords 'Trump', 'people', 'just'""")
+st.markdown("""Some interesting comment topics:   
+- :violet[**Homesteading and Farming**] **(6th Most Common topic):** Discussion of environmental and political collapse in the global south. Cuba and Haiti, specifically - two alleged examples of 'collapsed' states.  
+- :red[**Finances**] **(3rd Most Common topic):** How to afford life under climate catastrophe. Users discuss their personal and (inter)national economies. 
+- :green[**Geopolitics**] **(2nd Most Common Topic):** (Left-wing) analysis of international relations and international political economy.""")
 
-st.markdown("But if you want to learn more about what you're looking at in the graph at the link above...")
+st.markdown("But if you want to learn more about what you're looking at above, see **Tech Notes** below!")
+
+# BACKEND TABS - 
+st.header("Tech Notes")
+modeling, classification, morework = st.tabs(["Topic Modeling", "Text Classification", "Next Steps"])
 
 # TOPIC MODELING - BERTOPIC VIZ
-st.subheader("Topic Modeling - setting up BERTopic")
-st.markdown("""I used [BERTopic](https://github.com/MaartenGr/BERTopic), a Python package that takes sets of documents, mines them for their topics, and analyzes an entire corpus of the documents according to those (zero-shot-) classified topics.
+with modeling:
+  st.subheader("Topic Modeling - setting up BERTopic")
+  st.markdown("""I used [BERTopic](https://github.com/MaartenGr/BERTopic), a Python package that takes sets of documents, mines them for their topics, and analyzes an entire corpus of the documents according to those (zero-shot-) classified topics.
 """)
-st.markdown("""I first had to clean my dataset (removing stopwords, cleaning up uniform formatting on some subreddits' comments, etc), and then used BERTopic to determine the 'state space' - the kinds of things that people in these climate subreddits are talking about today.
+  st.markdown("""I first had to clean my dataset (removing stopwords, cleaning up uniform formatting on some subreddits' comments, etc), and then used BERTopic to determine the 'state space' - the kinds of things that people in these climate subreddits are talking about today.
 """)
 
-st.markdown("""The original dataset had 15807 topics; using BERTopic's reduce_topics() method, I forced the model to combine them into 20 groups. I then used a [SciKit-Learn](https://github.com/scikit-learn/scikit-learn) function to get text embeddings with English stop words removed, and re-ran the topic model with those vectorized topics. The final topic model, saved for use throughout the rest of the project, leverages these two modifications.
+  st.markdown("""The original dataset had 15807 topics; using BERTopic's reduce_topics() method, I forced the model to combine them into 20 groups. I then used a [SciKit-Learn](https://github.com/scikit-learn/scikit-learn) function to get text embeddings with English stop words removed, and re-ran the topic model with those vectorized topics. The final topic model, saved for use throughout the rest of the project, leverages these two modifications.
 """)
 
 # COMPARATIVE ANALYSIS - TEXT CLASSIFIERS
-st.subheader("Text Classification - comparing subreddits")
-st.markdown("""I'll perform two 'buckets' of comparative analysis:
+with classification:
+  st.subheader("Text Classification - comparing subreddits")
+  st.markdown("""I perform two 'buckets' of comparative analysis:
 - **Vector Database comparative analysis:** Analyzing BERTopic topics by subreddit, with the BERTopic 'vector database' built by that Python module:
   - this will help determine whether certain topics are unique to a given climate-subreddit. (Unlikely that any of the top 10 topics in the vizualization linked above are uniqe to one subreddit, but others might be!)
 - **Other Database analysis:** This is performed by augmenting a master data structure (pandas DataFrame, or .csv file) with algorithmically-derived classification, like:
@@ -116,19 +119,16 @@ st.markdown("""I'll perform two 'buckets' of comparative analysis:
 	- whether the text treats the climate as an opportunity/risk
   - psychological state of the user (optimistic vs. pessimistic, trusting vs. distrustful)
 """)
-
-st.markdown("""There are more tweaks I want to do to the underlying BERTopic model before I can get to **vector database analysis**, so I begin with **other database analysis** below.""")
-st.markdown("""To classify the original reddit comments, I utilize HuggingFace's [transformers](https://github.com/huggingface/transformers), specifically the `pipeline` API wrapper, which simplifies the workflow tremendously. 
+  st.markdown("""There are more tweaks I want to do to the underlying BERTopic model before I can get to **vector database analysis**, so I begin with **other database analysis** below.""")
+  st.markdown("""To classify the original reddit comments, I utilize HuggingFace's [transformers](https://github.com/huggingface/transformers), specifically the `pipeline` API wrapper, which simplifies the workflow tremendously. 
 """)
-with st.expander("**These are the Huggingface models I'm using for my text classification:**"):
+  st.markdown("**These are the Huggingface models I'm using for my text classification:**")
   st.markdown("""
 1) Classifying :blue-background[abusive language]: [Hate-speech-CNERG/english-abusive-MuRIL](https://huggingface.co/Hate-speech-CNERG/english-abusive-MuRIL)
 2) Classifying :blue-background[climate opportunity/risk]: [climatebert/distilroberta-base-climate-sentiment](https://huggingface.co/climatebert/distilroberta-base-climate-sentiment)
 3) Classifying social adaptivity - :blue-background[optimism vs. pessimism] and :blue-background[trust v. disgust]: [ayoubkirouane/BERT-Emotions-Classifier](https://huggingface.co/ayoubkirouane/BERT-Emotions-Classifier?text=This+is+a+basic+reddit+comment.)
 """)
-
-
-st.markdown(""" I'm looking to solve the following kinds of questions:
+  st.markdown("""**I'm looking to solve the following kinds of questions:**
 1. Which subreddits have the most instances of abusive language?
 2. Which comments approach the climate catastrophe as an opportunity to gain a cooperative or competitive advantage? Do they tend to belong to a given subreddit rather than others?
 3. How did the COVID-19 pandemic affect users' rhetoric regarding:  
@@ -136,10 +136,10 @@ a. public trust/the social contract
 b. resource hoarding (stockpiling goods)   
 c. world outlook (optimism vs. pessimism, trust vs. distrust)
 """)
-
 # MORE WORK
-st.subheader("Ongoing Work, Thoughts, Etc:")
-st.markdown("""
+with morework:
+  st.subheader("Ongoing Work, Thoughts, Etc:")
+  st.markdown("""
 - Topic Modeling
 	- I've settled on BERTopic for the majority (almost all) of my Topic Modeling/Semantic analysis, over ChromaDB, Txtai, and Gensim. BERTopic is easier to use out of the box than Txtai or Gensim, and has the key analysis features ChromaDB lacks. Keeping an eye out for Chroma, with my climate-conscious computation in mind...
 - Comparative Analysis
@@ -149,7 +149,6 @@ st.markdown("""
 - Final Data Presentation
 	- I'm thinking this project makes the most sense as an interactive website... easiest for me to send around to friends/family (my intended audience). 
 """)
-
 st.divider()
 
 # SOURCES
