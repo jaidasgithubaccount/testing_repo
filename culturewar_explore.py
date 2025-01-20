@@ -18,7 +18,7 @@ with documents:
   l, m, r = st.columns([0.3, 0.4, 0.3])
   with m:
     st.link_button(label="View Fullscreen", url="https://jaidasgithubaccount.github.io/data_visualizations")
-  components.iframe("https://jaidasgithubaccount.github.io/data_visualizations", width=300, height=500, scrolling=True)
+  components.iframe("https://jaidasgithubaccount.github.io/data_visualizations", width=900, height=500, scrolling=True)
 
 # ALL TOPICS - EXAMPLE COMMENTS
 with explore:
