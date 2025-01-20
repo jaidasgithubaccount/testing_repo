@@ -25,7 +25,7 @@ def Home():
     st.markdown("*Op-Ed, Bangor Daily News*")
     st.markdown("[News Link](https://www.bangordailynews.com/2022/07/26/opinion/opinion-contributor/harmful-dont-say-gay-bills-opinion-joam40zk0w/)")
 
-pages = [st.Page(Home, default=True), st.Page("culturewarftp.py", title="Culture War for the Planet"), st.Page("logicbot.py", title="LogicBot"), st.Page("climate_conscious_comp.py", title="Conscious Computation"), st.Page("culturewar_explpore.py", title="Explore the Culture War")]
+pages = [st.Page(Home, default=True), st.Page("culturewarftp.py", title="Culture War for the Planet"), st.Page("logicbot.py", title="LogicBot"), st.Page("climate_conscious_comp.py", title="Conscious Computation"), st.Page("culturewar_explore.py", title="Explore the Culture War")]
 pg = st.navigation(pages)
 pg.run()
 

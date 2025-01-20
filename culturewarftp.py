@@ -84,7 +84,7 @@ st.markdown("I've gotten some preliminary vizualizations of the topics discussed
 
 left, middle, right = st.columns([0.15, 0.7, 0.15])
 with middle:
-  st.page_link("culturewar_explore.py", label="Explore the Culture War", icon="🗺️")
+  st.page_link("culturewar_explore.py", label="Explore the Culture War", use_container_width=True, icon="🗺️")
 
 st.markdown("""Some interesting comment topics:   
 - :violet[**Homesteading and Farming**] **(6th Most Common topic):** Discussion of environmental and political collapse in the global south. Cuba and Haiti, specifically - two alleged examples of 'collapsed' states.  
