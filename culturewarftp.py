@@ -10,7 +10,7 @@ with middle:
   st.markdown("See [below](#analysis-topic-modeling-and-text-classification) for a sneak peek at the data collected so far!")
 
 #TABS - 
-st.header("Background")
+st.header("Background:")
 motives, thiscase, question, datasources = st.tabs(["Research Motivations", "What's r/Collapse?", "Research Questions", "Data Sources"])
 
 # RESEARCH MOTIVATIONS
@@ -78,7 +78,7 @@ st.divider()
 
 # ANALYSIS HEADER
 st.header("Analysis - Topic Modeling and Text Classification")
-st.info("This work is still ongoing. Check back later for more updates!")
+st.info("This work is still ongoing!")
 
 st.markdown("I've gotten some preliminary vizualizations of the topics discussed by Redditors in the various climate-related subreddits. See this link to explore interactive graphs:")
 
@@ -91,10 +91,11 @@ st.markdown("""Some interesting comment topics:
 - :red[**Finances**] **(3rd Most Common topic):** How to afford life under climate catastrophe. Users discuss their personal and (inter)national economies. 
 - :green[**Geopolitics**] **(2nd Most Common Topic):** (Left-wing) analysis of international relations and international political economy.""")
 
-st.markdown("But if you want to learn more about what you're looking at above, see **Tech Notes** below!")
+st.markdown("But if you want to learn more about what you're looking at on that page, see **Tech Notes** below!")
 
 # BACKEND TABS - 
-st.header("Tech Notes")
+st.divider()
+st.header("Tech Notes:")
 modeling, classification, morework = st.tabs(["Topic Modeling", "Text Classification", "Next Steps"])
 
 # TOPIC MODELING - BERTOPIC VIZ
@@ -141,9 +142,10 @@ with morework:
   st.subheader("Ongoing Work, Thoughts, Etc:")
   st.markdown("""
 - Topic Modeling
-	- I've settled on BERTopic for the majority (almost all) of my Topic Modeling/Semantic analysis, over ChromaDB, Txtai, and Gensim. BERTopic is easier to use out of the box than Txtai or Gensim, and has the key analysis features ChromaDB lacks. Keeping an eye out for Chroma, with my climate-conscious computation in mind...
+	- Moving forward through time: at the end of January, I'll update the BERTopic model with a set of new comments.
+  - Incorporating controversial topics: my first merge will feature half **popular**, half **controversial** textposts; aiming to get at the heart of topic disagreement within each subreddit.
 - Comparative Analysis
-	- Topic Modeling by class - currently working!
+  - Comparative topic modeling (topics by class) is preliminary visualized; analysis incoming!
 	- Text Classification (comparing abusive subreddits) - augmenting my dataset with text-classification scores (abusive language and climate-attitude)
 		- Currently stuck with some PyTorch bugs/weird RuntimeErrors. **Potential Fix:** get my hands dirty with the transformer models. The error I've gotten that halts my work is `RuntimeError: The size of tensor a (638) must match the size of tensor b (512) at non-singleton dimension 1`.
 - Final Data Presentation

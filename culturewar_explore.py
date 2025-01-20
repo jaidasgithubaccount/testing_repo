@@ -9,7 +9,7 @@ st.header("Graphs, Charts and other Vizualizations", divider="blue")
 st.info("This work is still ongoing. Check back later for more updates!")
 
 # TOPIC MODELING - TABS
-st.header("Topic Modeling")
+st.header("Topic Modeling:")
 documents, explore, topwords, overtime, byclass = st.tabs(["All Comments, Clustered", "Explore Topics", "Topic Keywords", "Topics over Time", "Topics by Subreddit"])
 
 # ALL TOPICS - ALL DOCUMENTS
@@ -70,8 +70,8 @@ with overtime:
 
 # TOP TOPICS - BY CLASS
 with byclass:
-  st.link_button(label="View Fullscreen", url="https://jaidasgithubaccount.github.io/data_visualizations/classtopics.html")
   st.subheader("Comparative Analysis - Topics by Subreddit")
+  st.link_button(label="View Fullscreen", url="https://jaidasgithubaccount.github.io/data_visualizations/classtopics.html")
   components.iframe("https://jaidasgithubaccount.github.io/data_visualizations/classtopics.html", height=500, scrolling=True)
 
 st.divider()
