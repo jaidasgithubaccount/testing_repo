@@ -121,7 +121,7 @@ with schema:
 with col25:
     # I/O
     st.subheader("Test if Premises imply Conclusion")
-    sec25prems = st.text_area("Input Premise(s):", key="premise_input", placeholder="Example: (1) If the fish is Kosher then the fish has fins and the fish has scales. (2) If the fish has fins and the fish has scales then the fish is Kosher. (3) If the fish has scales then the fish has fins.")
+    sec25prems = st.text_area("Input Premise(s):", key="premise_input", placeholder="Example: If the fish is Kosher then the fish has fins and the fish has scales. If the fish has fins and the fish has scales then the fish is Kosher. If the fish has scales then the fish has fins.")
     sec25concl = st.text_input("Input Conclusion:", key="conclusion_input", placeholder="If the fish has scales, then the fish is Kosher.")
     three, four, sixth = st.columns(3)
     with three:
