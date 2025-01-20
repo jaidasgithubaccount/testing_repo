@@ -4,10 +4,12 @@ import streamlit as st
 st.title("The Culture War for the Planet 🌎")
 st.header('Comparative analysis of Reddit forums r/collapse, r/preppers, r/itcouldhappenhere, r/climate and r/climatechange', divider="blue")
 
-# SNEAK PEEK
-left, middle, right = st.columns([0.15, 0.7, 0.15])
-with middle:
-  st.markdown("See [below](#analysis-topic-modeling-and-text-classification) for a sneak peek at the data collected so far!")
+st.page_link("culturewar_explore.py", label="This work is ongoing! Explore the data here.", icon="🗺️")
+
+# SNEAK PEEK - COMMENTED-OUT REGION
+#left, middle, right = st.columns([0.15, 0.7, 0.15])
+#with middle:
+  #st.markdown("See [below](#analysis-topic-modeling-and-text-classification) for a sneak peek at the data collected so far!")
 
 #TABS - 
 st.header("Background:")
@@ -63,7 +65,7 @@ with datasources:
 # DATA SOURCES + COLLECTION
   st.subheader("**Where did I get this information, and why does it help answer our questions?**")
   st.markdown("1. **The Reddit Comments**")
-  st.markdown("""I pulled 16,000 of the top comments and text posts of all time from r/collapse, r/preppers, r/itcouldhappenhere and r/climate, using [Praw](https://github.com/praw-dev/praw). Comments were mostly from the years after 2018, but the earliest post is from 2016.""")   
+  st.markdown("""I pulled 20,000 of the top comments and text posts of all time from r/collapse, r/preppers, r/itcouldhappenhere, r/climate and r/climatechange, using [Praw](https://github.com/praw-dev/praw). Comments were mostly from the years after 2018, but posts span from 2016 to present.""")   
   st.markdown("_The Reddit comments are the backbone of my analysis - their text content will be analyzed for abusive language._")
 
   st.markdown("**In order to classify the text I'd pulled as abusive language, or to determine the attitude toward climate change (opportunity vs. risk) in the text, I relied on machine learning models that had been pre-trained on other datasets...**")

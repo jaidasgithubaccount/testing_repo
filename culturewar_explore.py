@@ -44,7 +44,7 @@ with explore:
   "After the Power Grid": ["""Allowing people to believe that a clay pot is “magic” and can save your life in a pinch is irresponsible and could literally get somebody killed.  Everything in the universe follows the laws of thermodynamics.  There is no way to “magnify” heat.  Baring a legit miracle, it is just impossible.  A burning candle produces around 80-ish BTU.  A Mr. Heater Buddy produces 9,000 BTU on high.  (Total side note: a sleeping human produces around 360 BTUs.)  So yeah, if you light up 120 candles, you can heat a 200 sq ft room. It will be dangerous as hell, and as a happy side benefit they would absolutely produce enough carbon monoxide to kill you.  Ignoring all the numbers for a moment…  Not everything in science is obvious, but some things can rely on common sense.  Stepping back from the problem for a minute, imagine two rooms… one heated by a candle and the other heated by a single log in a fireplace.  Which one is warmer?  The moral of the story is that if you have no power and it is cold, put on warm clothes, don't forget a hat and socks, and get in bed with blankets. [...] Edit 2: I said you can't heat a room.  But yes, a candle and a pot could make a nice hand warmer.""", "Lighting and Heating without access to the grid. Lots of candles!"],
 }
   with eradio:
-    selection = st.radio(label="Topic Clusters", options=ops.keys(), index=None)
+    selection = st.radio(label="Topic Clusters - most to least common", options=ops.keys(), index=None)
   with docs:
     if selection == None:
       selected = "**Pick a Topic** to view one of the Most Representative Documents in the cluster!"
@@ -72,7 +72,7 @@ with overtime:
 with byclass:
   st.subheader("Comparative Analysis - Topics by Subreddit")
   st.link_button(label="View Fullscreen", url="https://jaidasgithubaccount.github.io/data_visualizations/classtopics.html")
-  components.iframe("https://jaidasgithubaccount.github.io/data_visualizations/classtopics.html", height=500, scrolling=True)
+  components.iframe("https://jaidasgithubaccount.github.io/data_visualizations/classtopics.html", height=900, scrolling=True)
 
 st.divider()
 
