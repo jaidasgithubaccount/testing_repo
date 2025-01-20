@@ -6,21 +6,27 @@ st.title("Exploring the Culture War 🗺️")
 st.page_link("culturewarftp.py", label="Back to Main Page", icon="🌎")
 st.header("Graphs, Charts and other Vizualizations", divider="blue")
 
-st.info("This work is still ongoing. Check back later for more updates!")
+st.info("This work is still ongoing. Next update in late January!")
 
 # TOPIC MODELING - TABS
 st.header("Topic Modeling:")
+st.page_link("https://chatbot-2ogvf67n62i.streamlit.app/~/+/culturewarftp#tech-notes", label="Courtesy of BERTopic - see Tech Notes", icon="💻")
 documents, explore, topwords, overtime, byclass = st.tabs(["All Comments, Clustered", "Explore Topics", "Topic Keywords", "Topics over Time", "Topics by Subreddit"])
 
 # ALL TOPICS - ALL DOCUMENTS
 with documents:
   st.subheader("Redditors' Takes on the Climate Catastrophe")
-  st.link_button(label="View Fullscreen", url="https://jaidasgithubaccount.github.io/data_visualizations")
+  st.link_button(label="View Fullscreen", url="https://jaidasgithubaccount.github.io/data_visualizations", help="Recommended: far less scrolling!")
+  st.markdown("*This graph visualizes 30 percent of the model's documents, sorted by their semantic similarity to one another, and colored according to the Topic Clusters BERTopic determined they best fit into.*")
+  st.markdown("Hover over color-coded clusters to read previews of representative comments. Nodes **near to one another** have **similar literal meanings**; nodes with the :rainbow[same color] discuss the :rainbow[same general topics]. :grey[(Grey comments are outliers!)] Click-and-drag to zoom in. Double-click any topic cluster to isolate it (and double-click the greyed-out topics to undo). Topics are sorted from most to least commonly discussed.")
   components.iframe("https://jaidasgithubaccount.github.io/data_visualizations", height=800, scrolling=True)
+  
 
 # ALL TOPICS - EXAMPLE COMMENTS
 with explore:
   st.subheader("Explore Topics with Example Comments")
+  st.markdown("*I use BERTopic to fit a pre-trained embedding model to a growing corpus of Reddit comments. BERTopic generates **embeddings** for each document, converting text into multi-dimensional vectors, and then runs algorithms to cluster them into 'neighborhoods' of similar topics.*")
+  st.markdown("For each topic cluster, BERTopic finds three documents at its 'center:' these are the **Most Representative Documents**. Pick from a topic cluster to read an excerpted anonymous Reddit post that most accurately represents that topic.")
   eradio, docs = st.columns([0.3, 0.7])
   ops = {
   "Economic and Social Collapse": ["""[...] going to Reddit for world news (specifically climate change) is the equivalent of using WebMD to diagnose yourself. There is a lot of truth on there, but all you are going to do is make yourself more anxious by looking at it. What I recommend is looking up reputable sources even if a little bias (BBC, IPCC, etc..) if you are really interested. Do what you can to help and vote for who will help the situation but don't let yourself get caught up in the 'mad max in 30 years' scenario. These scenarios are based on a worst case scenario (and even then its fishy asf) where we don't use technology to help what we have and also assumes we burn the maximum amount of fuels. As the U.S. and other countries make transitions to cleaner energy other developing countries will still be using coal and fuels. It is very likely we will not phase all fuels out in time, but we are also developing technology to help it out. All that's left is for us to vote and stick it to the people who are against green policies. As long as you do what you can rest assured worst case scenarios will be avoided (assuming nothing absolutely crazy irrational happens.) And I'm not saying this to make you complacent, I URGE you to make strides not only to improve yourselves but the world for us and the next generation. Humanity has so much potential, anyone saying it's already lost is lying to themselves. Hopefully I helped someone out with this, I struggled with this for the past 2 or 3 weeks[...]""", "Labor critiques + (anti-) capitalist (predictive) analysis."],
@@ -44,10 +50,10 @@ with explore:
   "After the Power Grid": ["""Allowing people to believe that a clay pot is “magic” and can save your life in a pinch is irresponsible and could literally get somebody killed.  Everything in the universe follows the laws of thermodynamics.  There is no way to “magnify” heat.  Baring a legit miracle, it is just impossible.  A burning candle produces around 80-ish BTU.  A Mr. Heater Buddy produces 9,000 BTU on high.  (Total side note: a sleeping human produces around 360 BTUs.)  So yeah, if you light up 120 candles, you can heat a 200 sq ft room. It will be dangerous as hell, and as a happy side benefit they would absolutely produce enough carbon monoxide to kill you.  Ignoring all the numbers for a moment…  Not everything in science is obvious, but some things can rely on common sense.  Stepping back from the problem for a minute, imagine two rooms… one heated by a candle and the other heated by a single log in a fireplace.  Which one is warmer?  The moral of the story is that if you have no power and it is cold, put on warm clothes, don't forget a hat and socks, and get in bed with blankets. [...] Edit 2: I said you can't heat a room.  But yes, a candle and a pot could make a nice hand warmer.""", "Lighting and Heating without access to the grid. Lots of candles!"],
 }
   with eradio:
-    selection = st.radio(label="Topic Clusters - most to least common", options=ops.keys(), index=None)
+    selection = st.radio(label="**Topic Clusters**, most to least common", options=ops.keys(), index=None)
   with docs:
     if selection == None:
-      selected = "**Pick a Topic** to view one of the Most Representative Documents in the cluster!"
+      selected = "**Pick a Topic Cluster** to view one of the Most Representative Documents in the cluster!"
       subtitle = "..."
     else:
       selected = ops[selection][0]
@@ -59,19 +65,25 @@ with explore:
 # ALL TOPICS - TOP WORDS
 with topwords:
   st.subheader("Most Frequent Words in Each Topic")
-  st.link_button(label="View Fullscreen", url="https://jaidasgithubaccount.github.io/data_visualizations/topicterms.html")
+  st.link_button(label="View Fullscreen", url="https://jaidasgithubaccount.github.io/data_visualizations/topicterms.html", help="Recommended: far less scrolling!")
+  st.markdown("*BERTopic also derives the ten most common words in each topic cluster.*")
+  st.markdown("Analysis of this data doesn't illuminate much - though this may change in time.")
   components.iframe("https://jaidasgithubaccount.github.io/data_visualizations/topicterms.html", height=500, scrolling=True)
 
 # ALL TOPICS - OVER TIME
 with overtime:
   st.subheader("Evolving Discourse - Topics over Time")
-  st.link_button(label="View Fullscreen", url="https://jaidasgithubaccount.github.io/data_visualizations/timetopics.html")
+  st.link_button(label="View Fullscreen", url="https://jaidasgithubaccount.github.io/data_visualizations/timetopics.html", help="Recommended: far less scrolling!")
+  st.markdown("*With the help of Reddit comment timestamps, BERTopic can show the development of different topics over time.*")
+  st.markdown("Double-click any topic cluster to isolate it (and double-click the greyed-out topics to undo). Topics are sorted from most to least commonly discussed - mind the scroll bar on the far right, which shows more Topic options.")
   components.iframe("https://jaidasgithubaccount.github.io/data_visualizations/timetopics.html", height=500, scrolling=True)
 
 # TOP TOPICS - BY CLASS
 with byclass:
   st.subheader("Comparative Analysis - Topics by Subreddit")
-  st.link_button(label="View Fullscreen", url="https://jaidasgithubaccount.github.io/data_visualizations/classtopics.html")
+  st.link_button(label="View Fullscreen", url="https://jaidasgithubaccount.github.io/data_visualizations/classtopics.html", help="Recommended: far less scrolling!")
+  st.markdown("*We can also bin the Topic clusters by any metric the BERTopic programmers consider a 'class' - in our case, the subreddit the comment came from - for comparative analysis. This graph shows how often each subreddit discusses a given topic compared to the others.*")
+  st.markdown("Double-click any topic cluster to isolate it (and double-click the greyed-out topics to undo). Topics are sorted from most to least commonly discussed: all the subreddits talk about :orange[Economic and Social Collapse], but only the r/preppers seem interested in heating their homes via candlelight :red[After the Power Grid]. Go figure.")
   components.iframe("https://jaidasgithubaccount.github.io/data_visualizations/classtopics.html", height=900, scrolling=True)
 
 st.divider()

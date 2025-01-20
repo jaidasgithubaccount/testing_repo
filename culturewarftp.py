@@ -4,7 +4,7 @@ import streamlit as st
 st.title("The Culture War for the Planet 🌎")
 st.header('Comparative analysis of Reddit forums r/collapse, r/preppers, r/itcouldhappenhere, r/climate and r/climatechange', divider="blue")
 
-st.page_link("culturewar_explore.py", label="This work is ongoing! Explore the data here.", icon="🗺️")
+st.page_link("culturewar_explore.py", label="This work is ongoing! Explore the data **here**.", icon="🗺️")
 
 # SNEAK PEEK - COMMENTED-OUT REGION
 #left, middle, right = st.columns([0.15, 0.7, 0.15])
@@ -18,7 +18,7 @@ motives, thiscase, question, datasources = st.tabs(["Research Motivations", "Wha
 # RESEARCH MOTIVATIONS
 with motives:
   st.subheader("Modeling Climate Change and Social Conflict")
-  st.markdown("There's a new burgeoning theory on the contentious politics market - that :blue-background[climate change is a potential security pressure.]")
+  st.markdown("There's a new burgeoning theory on the contentious politics market - that :blue-background[climate change is an (inter-)national security risk.]")
   st.markdown("Much of the current research seeks to answer the foundational question -- :blue-background[**is there a link between climate pressures and social, political and/or economic unrest?**]")
   st.markdown("To do so, researchers have tracked key metrics in various regions, evaluating communities' **climate risks**, **conflict risks** and **other infrastructural vulnerabilities** that might contribute to the next (inter)national crisis.")
   st.markdown("My research builds on the scholarship. And I've got a hunch about one, _specific_ aspect of the connection between the climate and social conflict...")
@@ -79,8 +79,7 @@ st.divider()
 
 
 # ANALYSIS HEADER
-st.header("Analysis - Topic Modeling and Text Classification")
-st.info("This work is still ongoing!")
+st.header("Analysis: Topic Modeling and Text Classification")
 
 st.markdown("I've gotten some preliminary vizualizations of the topics discussed by Redditors in the various climate-related subreddits. See this link to explore interactive graphs:")
 
@@ -92,7 +91,7 @@ st.markdown("""Some interesting comment topics:
 - :violet[**Homesteading and Farming**] **(6th Most Common topic):** Discussion of environmental and political collapse in the global south. Cuba and Haiti, specifically - two alleged examples of 'collapsed' states.  
 - :red[**Finances**] **(3rd Most Common topic):** How to afford life under climate catastrophe. Users discuss their personal and (inter)national economies. 
 - :green[**Geopolitics**] **(2nd Most Common Topic):** (Left-wing) analysis of international relations and international political economy.""")
-
+st.markdown("If you **Explore the Culture War** above, you'll see representative documents in all the topics, a graph showing the semantic similarity between all the comments in the corpus, and more.")
 st.markdown("But if you want to learn more about what you're looking at on that page, see **Tech Notes** below!")
 
 # BACKEND TABS - 
@@ -141,7 +140,7 @@ c. world outlook (optimism vs. pessimism, trust vs. distrust)
 """)
 # MORE WORK
 with morework:
-  st.subheader("Ongoing Work, Thoughts, Etc:")
+  st.subheader("Ongoing Work, Thoughts, Etc")
   st.markdown("""
 - Topic Modeling
 	- Moving forward through time: at the end of January, I'll update the BERTopic model with a set of new comments.
@@ -156,7 +155,7 @@ with morework:
 st.divider()
 
 # SOURCES
-st.header("Sources and Attributions")
+st.header("Sources and Attributions:")
 
 st.markdown("### Python Packages:")
 st.markdown("""**Python Reddit API Wrapper (PRAW)**  

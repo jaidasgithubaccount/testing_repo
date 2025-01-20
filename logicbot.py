@@ -79,6 +79,7 @@ st.markdown('''
             ''')
 
 # LOGICBOT 1.0
+st.divider()
 st.header("LogicBot 1.0 - Propositional Logic")
 st.subheader("_Using Regular Expressions_")
 introduction, legend = st.columns(2)
@@ -148,6 +149,7 @@ But, that'd be computationally intense, and I'm trying to save the planet, so...
 st.page_link("climate_conscious_comp.py", label="I'm not adding a 'soundness verifier' to the LogicBot anytime soon.", use_container_width=True)
 
 # LOGICBOT 2.0
+st.divider()
 st.header("LogicBot 2.0: Predicate Logic")
 st.subheader("_Now With Natural Language Processing!_")
 st.markdown("Future iterations of the LogicBot will utilize natural language processing to determine the ***Universe of Discourse*** and ***Scope of Discourse*** for certain sentences. The Universe of Discourse refers to the kinds of things enclosed by a variable like 'x' in a schema. The Scope refers to whether one refers to *all* elements in the universe, or only *some*.")
