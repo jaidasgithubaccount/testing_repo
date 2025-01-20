@@ -16,7 +16,7 @@ documents, explore, topwords, overtime, byclass = st.tabs(["All Comments, Cluste
 with documents:
   st.subheader("Redditors' Takes on the Climate Catastrophe")
   st.link_button(label="View Fullscreen", url="https://jaidasgithubaccount.github.io/data_visualizations")
-  components.iframe("https://jaidasgithubaccount.github.io/data_visualizations", width=900, height=750, scrolling=True)
+  components.iframe("https://jaidasgithubaccount.github.io/data_visualizations", height=800, scrolling=True)
 
 # ALL TOPICS - EXAMPLE COMMENTS
 with explore:
