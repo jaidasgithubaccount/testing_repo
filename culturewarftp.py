@@ -31,6 +31,8 @@ with motives:
 
   st.markdown("Politicians and bad-faith actors alike are listening and part of these online conversations, too: to the extent we put our votes and protests where our _twitter-fingers_ are, the rhetoric we use online mirrors world we build outside. In short, **the kinds of things we say about the climate may help determine whether our communities' attitudes of resilient cooperation will help us survive the climate catastrophe, or if anti-social infighting will tear our social fabric apart.** After all, social media sentiment analysis has proven a decent method of [ascertaining public opinion](https://doi.org/10.1016/j.dajour.2022.100073).")
 
+  st.markdown("Click the next tab to hear how **r/collapse** fits in, or see **analysis** below.")
+
 # ABOUT SUBREDDITS and COLLAPSE
 with thiscase:
   st.subheader("So, what's going on on with r/Collapse?")
@@ -51,6 +53,7 @@ with thiscase:
   st.markdown("In our worsening climate catastrophe, I've noticed the growth of r/collapse -- and, perhaps more notably, the spread of its doomer rhetoric to other, less-controversial climate related subreddits, like **r/preppers**, **r/itcouldhappenhere**, and **r/climate**.")
   st.markdown("I'm aiming to find through-lines and AI-classified* similarities between different users' positions, across the four subreddits. I want to map out the rhetorical 'state space' - with an eye out for any other information I can pick up, like the relative popularity of certain approaches to climate change.")
   st.caption("\*_Aiming not to over-use high-compute power AI models for this, a pet project that's meant to be about saving the planet. See the **Climate-Conscious Compuatation** page for more._")
+  st.markdown("Click the next tab for this project's **research questions**, or see **analysis** below.")
 
 
 # RESEARCH QUESTION
@@ -59,7 +62,8 @@ with question:
   st.subheader("1. Is there a link between climate pressures and social, political and/or economic unrest?")
   st.subheader("2. Are there places online where you're more likely to fall down a climate doomer rabbit hole? _What makes the difference?_")
   st.markdown("This question has all sorts of component parts, but answering it will require a working definition of 'doomer' vs. non-doomer online spaces: I've decided to track the subreddits' **abusive language**, and whether the comments/posts in a subreddit see the changing climate as more of a **risk** to themsleves and others, or an **opportunity** to make money or secure power over others.")
-  st.markdown("And of course, I'm comparatively analyzing the four subreddits to determine the relatively 'most/least' abusive ones, but I'll also be tracking any change in rhetoric related to climate over time (dataset collects Tweets and Reddit posts from 2018).")
+  st.markdown("And of course, I'm comparatively analyzing the four subreddits to determine the relatively 'most/least' abusive ones, but I'll also be tracking any change in rhetoric related to climate over time.")
+  st.markdown("Click the next tab for this project's **data sources**, or see **analysis** below.")
 
 with datasources:
 # DATA SOURCES + COLLECTION
