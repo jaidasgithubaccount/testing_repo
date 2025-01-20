@@ -4,8 +4,8 @@ import streamlit.components.v1 as components
 # Show title and description.
 st.title("Exploring the Culture War 🗺️")
 st.page_link("culturewarftp.py", label="Back to Main Page", icon="🌎")
-st.header("", divider="blue")
-st.header('Graphs, Charts and other Vizualizations')
+st.header("Graphs, Charts and other Vizualizations", divider="blue")
+
 st.info("This work is still ongoing. Check back later for more updates!")
 
 # TOPIC MODELING - TABS
@@ -15,10 +15,8 @@ documents, explore, topwords, overtime, byclass = st.tabs(["All Comments, Cluste
 # ALL TOPICS - ALL DOCUMENTS
 with documents:
   st.subheader("Redditors' Takes on the Climate Catastrophe")
-  l, m, r = st.columns([0.3, 0.4, 0.3])
-  with m:
-    st.link_button(label="View Fullscreen", url="https://jaidasgithubaccount.github.io/data_visualizations")
-  components.iframe("https://jaidasgithubaccount.github.io/data_visualizations", width=900, height=500, scrolling=True)
+  st.link_button(label="View Fullscreen", url="https://jaidasgithubaccount.github.io/data_visualizations")
+  components.iframe("https://jaidasgithubaccount.github.io/data_visualizations", width=900, height=750, scrolling=True)
 
 # ALL TOPICS - EXAMPLE COMMENTS
 with explore:
@@ -61,15 +59,18 @@ with explore:
 # ALL TOPICS - TOP WORDS
 with topwords:
   st.subheader("Most Frequent Words in Each Topic")
+  st.link_button(label="View Fullscreen", url="https://jaidasgithubaccount.github.io/data_visualizations/topicterms.html")
   components.iframe("https://jaidasgithubaccount.github.io/data_visualizations/topicterms.html", height=500, scrolling=True)
 
 # ALL TOPICS - OVER TIME
 with overtime:
   st.subheader("Evolving Discourse - Topics over Time")
+  st.link_button(label="View Fullscreen", url="https://jaidasgithubaccount.github.io/data_visualizations/timetopics.html")
   components.iframe("https://jaidasgithubaccount.github.io/data_visualizations/timetopics.html", height=500, scrolling=True)
 
 # TOP TOPICS - BY CLASS
 with byclass:
+  st.link_button(label="View Fullscreen", url="https://jaidasgithubaccount.github.io/data_visualizations/classtopics.html")
   st.subheader("Comparative Analysis - Topics by Subreddit")
   components.iframe("https://jaidasgithubaccount.github.io/data_visualizations/classtopics.html", height=500, scrolling=True)
 

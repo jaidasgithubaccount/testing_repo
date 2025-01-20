@@ -82,7 +82,7 @@ st.info("This work is still ongoing. Check back later for more updates!")
 
 st.markdown("I've gotten some preliminary vizualizations of the topics discussed by Redditors in the various climate-related subreddits. See this link to explore interactive graphs:")
 
-left, middle, right = st.columns([0.15, 0.7, 0.15])
+left, middle, right = st.columns([0.3, 0.4, 0.3])
 with middle:
   st.page_link("culturewar_explore.py", label="Explore the Culture War", use_container_width=True, icon="🗺️")
 
