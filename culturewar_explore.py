@@ -6,7 +6,7 @@ st.title("Exploring the Culture War 🗺️")
 st.page_link("culturewarftp.py", label="Back to Main Page", icon="🌎")
 st.header("Graphs, Charts and other Vizualizations", divider="blue")
 
-st.info("Next update in late January!")
+st.info("Check back soon for more updates!")
 
 # TOPIC MODELING - TABS
 st.header("Topic Modeling:")
